@@ -5,12 +5,18 @@ import { GlobalZIndexCounterContext } from "../contexts";
 // link: https://stackoverflow.com/questions/20926551/recommended-way-of-making-react-component-div-draggable
 // from the answer by Jared Forsyth, link: https://stackoverflow.com/users/290784/jared-forsyth answered Jan 4, 2014 at 23:13
 
+//▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌
+//▐   DOESN'T SUPPORT   ▌
+//▐  NESTED DRAGGABLES  ▌
+//▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
+
 export default function Draggable({
 	initialPos = { x: 0, y: 0 },
 	TopBarComponent,
 	ChildrenWrapperComponent,
 	children,
 	classes,
+	material,
 	...rest
 }) {
 	// position of the draggable element
@@ -34,11 +40,26 @@ export default function Draggable({
 			// if it isn't currently dragging anything...
 			if (!isDragging) return; // ... we don't care.
 
-			// if it is, change the position of the element, keeping in mind the offset
-			setPosition({
-				x: e.pageX - mouseAndElementOffset.current.x,
-				y: e.pageY - mouseAndElementOffset.current.y,
-			});
+			function clamp(value, min, max) {
+				return Math.max(min, Math.min(value, max));
+			}
+			const topBarHeight = 28;
+			let newX = e.pageX - mouseAndElementOffset.current.x;
+			let newY = e.pageY - mouseAndElementOffset.current.y;
+			newX = clamp(
+				newX,
+				0,
+				window.innerWidth - nodeRef.current.getBoundingClientRect().width - 14,
+			);
+			newY = clamp(newY, 0, 2000 - topBarHeight);
+
+			setPosition({ x: newX, y: newY });
+
+			// // if it is, change the position of the element, keeping in mind the offset
+			// setPosition({
+			// 	x: e.pageX - mouseAndElementOffset.current.x,
+			// 	y: e.pageY - mouseAndElementOffset.current.y,
+			// });
 
 			e.preventDefault();
 		}
@@ -51,6 +72,8 @@ export default function Draggable({
 
 			// tell the window to stop following the mouse
 			setIsDragging(false);
+
+			if (material) nodeRef.current.style.borderTopWidth = "0px";
 
 			e.preventDefault();
 		}
@@ -83,11 +106,15 @@ export default function Draggable({
 
 		// set the element above everything else while the mouse is dragging
 		nodeRef.current.style.zIndex = 9999;
+		if (material) {
+			nodeRef.current.style.borderTopWidth = "10px";
+			nodeRef.current.style.borderColor = "transparent";
+		}
 
 		// store the initial offset between the mouse position and the element’s top-left corner
 		mouseAndElementOffset.current = {
-			x: e.pageX - rect.left,
-			y: e.pageY - rect.top,
+			x: e.pageX - (rect.left + window.scrollX), // keeps the scroll in mind now
+			y: e.pageY - (rect.top + window.scrollY),
 		};
 
 		// mouse IS dragging!
@@ -105,7 +132,7 @@ export default function Draggable({
 				left: `${position.x}px`,
 				top: `${position.y}px`,
 				cursor: isDragging ? "grabbing" : "grab",
-				zIndex: -1, // initial z-index
+				zIndex: 0, // initial z-index
 			}}
 			className={classes}
 			{...rest}
