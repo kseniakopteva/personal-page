@@ -14,12 +14,21 @@ function App() {
 	const [isMoviesVisible, setIsMoviesVisible] = useState(false);
 	const movieWindowRef = useRef();
 
+	const [isMusicVisible, setIsMusicVisible] = useState(false);
+	const musicWindowRef = useRef();
+
 	const [fullscreenImage, setFullscreenImage] = useState("");
 	const dimWrapperRef = useRef(null);
 
 	function toggleMovieReviews() {
 		setIsMoviesVisible(!isMoviesVisible);
 		movieWindowRef.current.style.zIndex = zIndexCounterHook[0];
+		zIndexCounterHook[1](zIndexCounterHook[0] + 1);
+	}
+
+	function toggleMyMusic() {
+		setIsMusicVisible(!isMusicVisible);
+		musicWindowRef.current.style.zIndex = zIndexCounterHook[0];
 		zIndexCounterHook[1](zIndexCounterHook[0] + 1);
 	}
 
@@ -34,6 +43,34 @@ function App() {
 			document.removeEventListener("mousedown", handleClickOutside);
 		};
 	}, [dimWrapperRef]);
+
+	const musicAlbums = [
+		{
+			artist: "Simon and Garfunkel",
+			name: "Parsley, Sage, Rosemary and Thyme",
+			img: "ParsleySage.jpg",
+		},
+		{
+			artist: "ELO",
+			name: "Time",
+			img: "time.jpg",
+		},
+		{
+			artist: "Small Fools",
+			name: "Tree of Life, Melt in the Sun, Violet (singles but covers are similar...)",
+			img: "tree_of_life.jpg",
+		},
+	];
+
+	const welcomeText = [
+		"Hello there, fellow digital traveler.",
+		"I am pleased to see you here in my little corner of this vast Virtual Web.",
+		"I am glad you found me, and didn't get lost along the way.",
+		"",
+		"Relax and enjoy this cup of tea (or coffee.)",
+		"(Use the buttons in the top right of every window to collapse or close it.)",
+		"(To restore all: reload the page)",
+	];
 
 	return (
 		<GlobalZIndexCounterContext value={zIndexCounterHook}>
@@ -71,7 +108,7 @@ function App() {
 				>
 					<div className="flex flex-col gap-2 w-35 p-3">
 						<Button onClick={toggleMovieReviews}>My Movies</Button>
-						<Button>My Music</Button>
+						<Button onClick={toggleMyMusic}>My Music</Button>
 						<Button>My Photos</Button>
 					</div>
 				</DraggableWindow>
@@ -160,6 +197,14 @@ function App() {
 							<h1 className="text-3xl font-bold">Hello World!</h1>
 							<h2 className="text-lg italic">This is my page.</h2>
 							<div className="border border-sky-200 my-3"></div>
+							<div className="flex">
+								{[...Array(6)].map(() => (
+									<img
+										src="/img/construction.gif"
+										className="h-[22.25px]"
+									/>
+								))}
+							</div>
 						</div>
 					</div>
 				</DraggableWindow>
@@ -177,12 +222,12 @@ function App() {
 					</div>
 				</DraggableWindow>
 
-				<Draggable initialPos={{ x: window.innerWidth - 710, y: 610 }}>
-					<img
-						src="/img/jester2_right.png"
-						className="h-70 filter-[drop-shadow(0_2px_2px_#000)]"
-						alt=""
-					/>
+				<Draggable
+					initialPos={{ x: window.innerWidth - 710, y: 610 }}
+					shadow={true}
+					material={true}
+				>
+					<img src="/img/jester2_right.png" className="h-70" alt="" />
 				</Draggable>
 
 				<DraggableWindow title={"Footer"} initialPos={{ x: 300, y: 1900 }}>
@@ -190,10 +235,13 @@ function App() {
 						<div className=""></div>
 					</div>
 				</DraggableWindow>
-				<Draggable initialPos={{ x: window.innerWidth - 350, y: 1600 }}>
-					{" "}
-					<div className="w-70 [box-shadow:0px_2px_10px_3px_#000] transform-[rotate(0.005turn)]">
-						<img src="../img/ce13dfed0ee832386c9be45245b7f3f7.jpg" alt="" />
+				<Draggable
+					initialPos={{ x: window.innerWidth - 350, y: 1600 }}
+					shadow={"large"}
+					material={true}
+				>
+					<div className="w-70 transform-[rotate(0.005turn)]">
+						<img src="../img/vans_ad.jpg" alt="" />
 					</div>
 				</Draggable>
 				<DraggableWindow
@@ -211,7 +259,100 @@ function App() {
 					setFullscreenImage={setFullscreenImage}
 				/>
 
+				<DraggableWindow
+					ref={musicWindowRef}
+					initialPos={{
+						x: 400,
+						y: 200,
+					}}
+					isVisible={isMusicVisible}
+					setIsVisible={setIsMusicVisible}
+				>
+					<div className=" w-120">
+						<div className="flex gap-5">
+							<h2 className="text-xl font-bold mb-3 whitespace-nowrap">
+								My Favorite Albums
+							</h2>
+							<span className="text-xs leading-3 text-right">
+								I love music, and I listen to different stuff every day.
+								This is more of a hall of fame for albums I can listen to
+								from the first song to the last.
+							</span>
+						</div>
+						<div className="flex gap-4 flex-wrap justify-between items-start p-3 ">
+							{musicAlbums.map((album) => (
+								<div className="w-35 text-xs font-mono text-center relative">
+									<img
+										className="relative w-35 h-35 mb-2 [box-shadow:1px_1px_4px_0px_#000] border scale-100 hover:scale-[2.5] z-2 hover:z-4 transition-transform"
+										src={`/img/music/${album.img}`}
+									/>
+									<img
+										src="/img/music/overlay2.jpg"
+										className="absolute top-0 left-0 z-3 w-35 h-35 pointer-events-none mix-blend-screen"
+									/>
+									<p className="font-bold text-sm">{album.name}</p>
+									<p>{album.artist}</p>
+								</div>
+							))}
+						</div>
+					</div>
+				</DraggableWindow>
+
 				<HeaderMarquee />
+
+				<DraggableWindow
+					title={"Command Prompt - Welcome :3"}
+					noMargin={true}
+					initialPos={{
+						x: window.innerWidth / 2 - 250,
+						y: window.innerHeight / 2 - 270,
+					}}
+					shadow={"large"}
+				>
+					<pre className="w-[500px] h-[400px] whitespace-pre-wrap text-sm">
+						<p className="leading-4 mb-2">
+							Microsoft❮R❯ Windows DOS
+							<br />
+							❮C❯ Copyright Microsoft Corp 1990-2001.
+						</p>
+						{welcomeText.map((paragraph) =>
+							paragraph !== "" ? (
+								<div className="flex">
+									<p>C:\WINDOWS\SYSTEM32{">"}</p>
+
+									<p className="ml-2 text-white filter-[drop-shadow(0_0_4px_#FFF)]">
+										{paragraph}
+									</p>
+								</div>
+							) : (
+								<p className="text-[0.3rem] flex justify-center text-[#00FF00]">
+									<br />
+									<br />
+									<br />
+									{"      "}██{"    "}██{"    "}██{"      "} <br />
+									{"    "}██{"      "}██{"  "}██{"        "} <br />
+									{"    "}██{"    "}██{"    "}██{"        "} <br />
+									{"      "}██{"  "}██{"      "}██{"      "} <br />
+									{"      "}██{"    "}██{"    "}██{"      "} <br />
+									{"                              "}
+									<br />
+									{"  "}████████████████████{"    "} <br />
+									{"  "}██{"                "}██████{""} <br />
+									{"  "}██{"                "}██{"  "}██{""} <br />
+									{"  "}██{"                "}██{"  "}██{""} <br />
+									{"  "}██{"                "}██████{""} <br />
+									{"    "}██{"            "}██{"      "} <br />
+									{""}████████████████████████{"  "} <br />
+									{""}██{"                    "}██{"  "} <br />
+									{"  "}████████████████████{"    "} <br />
+									<br />
+									<br />
+									<br />
+								</p>
+							),
+						)}
+					</pre>
+				</DraggableWindow>
 			</header>
 			{fullscreenImage && (
 				<div
