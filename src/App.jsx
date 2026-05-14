@@ -8,6 +8,7 @@ import Blinkies from "./components/Blinkies";
 import CoolWebsiteLinks from "./components/CoolWebsiteLinks";
 import HeaderMarquee from "./components/HeaderMarquee";
 import Button from "./components/Button";
+import GifImage from "./components/GifImage";
 
 function App() {
 	const zIndexCounterHook = useState(0);
@@ -241,7 +242,7 @@ function App() {
 				>
 					<a href="/dungeon">
 						<div className="relative">
-							<img src="/img/hallway_1.gif" alt="" className="w-100" />
+							<GifImage srcSlugPath={"/img/hallway_1"} classes="w-100" />
 							<p className="absolute text-center top-[calc(50%-30px)] text-white left-[calc(50%-70px)] font-mono text-shadow-lg text-shadow-white">
 								Follow me <br />
 								into the dungeon
@@ -285,7 +286,7 @@ function App() {
 					title={"See you space cowboy..."}
 					noMargin={true}
 				>
-					<div className="h-30 p-7 bg-[url('../../../public/img/patterns/stars.gif')]"></div>
+					<div className="h-30 p-7 bg-[url('../../../public/img/patterns/stars.gif')] motion-reduce:bg-[url('../../../public/img/patterns/stars.jpg')]"></div>
 				</DraggableWindow>
 				<MovieReviews
 					isMoviesVisible={isMoviesVisible}

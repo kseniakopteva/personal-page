@@ -1,112 +1,113 @@
+import GifImage from "./GifImage";
+
 export default function Blinkies() {
 	const blinkies = [
 		{
-			img: "pretty.gif",
+			img: "pretty",
 			url: "",
 		},
 		{
-			img: "oldoldpicture.gif",
+			img: "oldoldpicture",
 			url: "https://blinkies.cafe",
 		},
 		{
-			img: "artist.gif",
+			img: "artist",
 			url: "",
 		},
 		{
-			img: "computerneversleeps.gif",
+			img: "computerneversleeps",
 			url: "",
 		},
 		{
-			img: "cats1.gif",
+			img: "cats1",
 			url: "",
 		},
 		// {
-		// 	img: "drinkwater.gif",
+		// 	img: "drinkwater",
 		// 	url: "https://glittergroovy.tumblr.com/",
 		// },
 		{
-			img: "ducks.gif",
+			img: "ducks",
 			url: "",
 		},
 		{
-			img: "hornsnfangs.gif",
+			img: "hornsnfangs",
 			url: "",
 		},
 		// {
-		// 	img: "antinftcryptoai.gif",
+		// 	img: "antinftcryptoai",
 		// 	url: "",
 		// },
 		{
-			img: "htmltags.gif",
+			img: "htmltags",
 			url: "",
 		},
 		{
-			img: "mediaplayer.gif",
+			img: "mediaplayer",
 			url: "",
 		},
 		{
-			img: "igazeatstars.gif",
+			img: "igazeatstars",
 			url: "",
 		},
 		{
-			img: "piracyethical.gif",
+			img: "piracyethical",
 			url: "",
 		},
 		{
-			img: "stretch.gif",
+			img: "stretch",
 			url: "https://glittergroovy.tumblr.com/",
 		},
 		// {
-		// 	img: "violentvideogames.gif",
+		// 	img: "violentvideogames",
 		// 	url: "",
 		// },
 		{
-			img: "in_the_dungeon_1.gif",
+			img: "in_the_dungeon_1",
 			url: "https://vinnyvistazo.com/resources/graphics",
 		},
 		{
-			img: "knight.gif",
+			img: "knight",
 			url: "https://vinnyvistazo.com/resources/graphics",
 		},
 		{
-			img: "let_me_look.gif",
+			img: "let_me_look",
 			url: "https://vinnyvistazo.com/resources/graphics",
 		},
 		// {
-		// 	img: "otherworldly_creature_1.gif",
+		// 	img: "otherworldly_creature_1",
 		// 	url: "https://vinnyvistazo.com/resources/graphics",
 		// },
 		{
-			img: "spellcasting.gif",
+			img: "spellcasting",
 			url: "https://vinnyvistazo.com/resources/graphics",
 		},
 		{
-			img: "wizard.gif",
+			img: "wizard",
 			url: "https://vinnyvistazo.com/resources/graphics",
 		},
 		{
-			img: "0028-computer.gif",
+			img: "0028-computer",
 			url: "https://graphics-cafe.tumblr.com/",
 		},
 		{
-			img: "0015-exit-button.gif",
+			img: "0015-exit-button",
 			url: "https://graphics-cafe.tumblr.com/",
 		},
 		{
-			img: "0055-rainbowswirl.gif",
+			img: "0055-rainbowswirl",
 			url: "https://graphics-cafe.tumblr.com/",
 		},
 		{
-			img: "0231-treeforest.gif",
+			img: "0231-treeforest",
 			url: "https://kotatsu.me/",
 		},
 		// {
-		// 	img: "0148-kirbyswim.gif",
+		// 	img: "0148-kirbyswim",
 		// 	url: "https://transbro.neocities.org/",
 		// },
-
 		{
-			img: "0253-rainbowheartclownballoons.gif",
+			img: "0253-rainbowheartclownballoons",
 			url: "https://crowpunk.neocities.org/",
 		},
 	];
@@ -116,17 +117,15 @@ export default function Blinkies() {
 			{blinkies.map((blinky) =>
 				blinky.url ? (
 					<a href={blinky.url}>
-						<img
-							src={`img/blinkies/${blinky.img}`}
-							alt=""
-							className={`h-5 w-37.5 ${blinky.url ? "" : "cursor-default"}`}
+						<GifImage
+							srcSlugPath={`img/blinkies/${blinky.img}`}
+							classes={`h-5 w-37.5`}
 						/>
 					</a>
 				) : (
-					<img
-						src={`img/blinkies/${blinky.img}`}
-						alt=""
-						className={`h-5 w-37.5 ${blinky.url ? "" : "cursor-default"}`}
+					<GifImage
+						srcSlugPath={`img/blinkies/${blinky.img}`}
+						classes={`h-5 w-37.5`}
 					/>
 				),
 			)}

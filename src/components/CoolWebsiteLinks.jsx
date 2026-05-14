@@ -1,63 +1,75 @@
+import GifImage from "./GifImage";
+
 export default function CoolWebsiteLinks() {
 	const width = 88 * 1.17;
 	const height = 31;
 
+	const allButtons = [
+		{
+			url: "https://miserabledolly.neocities.org/",
+			imageSlug: "miserabledolly",
+		},
+		{
+			url: "https://keysklubhouse.com/",
+			imageSlug: "keysclubhouse",
+		},
+		{
+			url: "https://dollarchive.neocities.org/",
+			imageSlug: "dollarchive",
+		},
+		{
+			url: "https://frutigeraeroarchive.org/",
+			imageSlug: "frutigeraeroarchive_button_alt",
+			orig: "png",
+			copy: "png",
+		},
+		{
+			url: "https://dokode.moe/",
+			imageSlug: "dokodemobutton3",
+		},
+		{
+			url: "https://daniele63.com/",
+			imageSlug: "danieles_button",
+			orig: "png",
+			copy: "png",
+		},
+		{
+			url: "https://controlcoreangel.neocities.org/",
+			imageSlug: "cca_neocities_button",
+		},
+		{
+			url: "https://arutemu64.neocities.org/",
+			imageSlug: "arutemu64",
+		},
+		{
+			url: "https://vaerael.neocities.org/",
+			imageSlug: "vaerael",
+			orig: "png",
+			copy: "png",
+		},
+		{
+			url: "https://unicodeangel.neocities.org/",
+			imageSlug: "UnicodeAngelButton3",
+		},
+		{
+			url: "https://olliveen.neocities.org/",
+			imageSlug: "olliveen",
+		},
+	];
+
 	return (
 		<div className=" flex gap-1 flex-wrap border p-6 [border-image-source:url(../../../img/fleabag.png)] [border-image-slice:77] [border-image-width:20]">
-			<a href="https://miserabledolly.neocities.org/" target="_blank">
-				<img src="img/buttons/miserabledolly.gif" width={width} height={height} />
-			</a>
-			<a href="https://keysklubhouse.com/" target="_blank">
-				<img src="img/buttons/keysclubhouse.gif" width={width} height={height} />
-			</a>
-			<a href="https://dollarchive.neocities.org/" target="_blank">
-				<img src="img/buttons/dollarchive.gif" width={width} height={height} />
-			</a>
-
-			<a href="https://frutigeraeroarchive.org/" target="_blank">
-				<img
-					src="img/buttons/frutigeraeroarchive_button_alt.png"
-					width={width}
-					height={height}
-				/>
-			</a>
-			<a href="https://dokode.moe/" target="_blank">
-				<img
-					src="img/buttons/dokodemobutton3.gif"
-					width={width}
-					height={height}
-				/>
-			</a>
-			<a href="https://daniele63.com/" target="_blank">
-				<img
-					src="img/buttons/danieles_button.png"
-					width={width}
-					height={height}
-				/>
-			</a>
-			<a href="https://controlcoreangel.neocities.org/" target="_blank">
-				<img
-					src="img/buttons/cca_neocities_button.gif"
-					width={width}
-					height={height}
-				/>
-			</a>
-			<a href="https://arutemu64.neocities.org/" target="_blank">
-				<img src="img/buttons/arutemu64.gif" width={width} height={height} />
-			</a>
-			<a href="https://vaerael.neocities.org/" target="_blank">
-				<img src="img/buttons/vaerael.png" width={width} height={height} />
-			</a>
-			<a href="https://unicodeangel.neocities.org/" target="_blank">
-				<img
-					src="img/buttons/UnicodeAngelButton3.gif"
-					width={width}
-					height={height}
-				/>
-			</a>
-			<a href="https://olliveen.neocities.org/" target="_blank">
-				<img src="img/buttons/olliveen.gif" width={width} height={height} />
-			</a>
+			{allButtons.map((btn) => (
+				<a href={btn.url} target="_blank">
+					<GifImage
+						srcSlugPath={`img/buttons/${btn.imageSlug}`}
+						orig={btn.orig ? btn.orig : undefined}
+						copy={btn.copy ? btn.copy : undefined}
+						width={width}
+						height={height}
+					/>
+				</a>
+			))}
 		</div>
 	);
 }
