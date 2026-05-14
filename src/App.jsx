@@ -11,7 +11,7 @@ import Button from "./components/Button";
 import GifImage from "./components/GifImage";
 
 function App() {
-	const zIndexCounterHook = useState(0);
+	const zIndexCounterHook = useState(1);
 	const [isMoviesVisible, setIsMoviesVisible] = useState(false);
 	const movieWindowRef = useRef();
 
