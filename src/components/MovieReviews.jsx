@@ -39,7 +39,7 @@ export default function MovieReviews({
 				y: 260,
 			}}
 		>
-			<div className="md:w-90 lg:w-100 2xl:w-200 flex gap-5 h-[400px]">
+			<div className="flex gap-5 h-[400px]">
 				<div className="m-1 min-h-0 flex flex-col">
 					<h2 className="text-xl font-bold">My Movie Reviews</h2>
 					<ul className="overflow-y-scroll min-h-0 h-full">
@@ -70,7 +70,7 @@ export default function MovieReviews({
 					</ul>
 				</div>
 				{activeMovie ? (
-					<div className="flex-1 overflow-y-scroll">
+					<div className="flex-1 overflow-y-scroll w-150">
 						<div className="flex justify-between items-start">
 							<div className="flex-1">
 								<h3 className="text-lg font-bold">{activeMovie.name}</h3>
@@ -149,7 +149,7 @@ export default function MovieReviews({
 						</div>
 					</div>
 				) : (
-					<div className="text-sm italic w-full h-full flex-1 flex justify-center items-center">
+					<div className="text-sm italic h-full flex-1 flex justify-center items-center  w-150">
 						<p className="text-center">
 							Click on any movie on the left to read the review! <br />
 							Beware of spoilers...

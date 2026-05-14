@@ -77,38 +77,40 @@ function App() {
 			<main
 				style={{
 					position: "relative",
-					minHeight: "100vh",
 					height: "2077px",
 					backgroundImage: "url('../../../public/img/patterns/clovers.gif')",
 					backgroundRepeat: "repeat",
 				}}
 			>
 				<DraggableWindow
-					initialPos={{ x: window.innerWidth - 200, y: 30 }}
+					horizontalPosition={"far-right"}
+					distanceFromTop={20}
 					title={"Clock"}
 				>
 					<Clock />
 				</DraggableWindow>
 				<DraggableWindow
-					initialPos={{ x: 40, y: 780 }}
+					horizontalPosition={"far-left"}
+					distanceFromTop={780}
 					title={"Cool websites I like"}
-					classes="max-w-60"
 					noMargin={true}
 				>
 					<CoolWebsiteLinks />
 				</DraggableWindow>
 				<DraggableWindow
-					initialPos={{ x: window.innerWidth - 230, y: 370 }}
 					title={"Blinkies"}
 					noMargin={false}
+					horizontalPosition={"far-right"}
+					distanceFromTop={370}
 				>
 					<Blinkies />
 				</DraggableWindow>
 				<DraggableWindow
-					initialPos={{ x: window.innerWidth - 220, y: 180 }}
+					horizontalPosition={"far-right"}
+					distanceFromTop={180}
 					noMargin={true}
 				>
-					<div className="flex flex-col gap-2 w-35 p-3">
+					<div className="flex flex-col gap-2 p-3">
 						<Button onClick={toggleMovieReviews}>My Movies</Button>
 						<Button onClick={toggleMyMusic}>My Music</Button>
 						<Button>My Photos</Button>
@@ -116,8 +118,10 @@ function App() {
 				</DraggableWindow>
 
 				<DraggableWindow
-					initialPos={{ x: 20, y: 426 }}
-					classes="text-sm max-w-65"
+					horizontalPosition={"far-left"}
+					distanceFromTop={426}
+					title={"Dolor"}
+					classes="text-sm"
 				>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet modi at
 					quaerat ab sequi quos quia recusandae. Esse perspiciatis recusandae ea
@@ -127,15 +131,27 @@ function App() {
 					rerum, eum, saepe, maxime quisquam iure ab ad eos veritatis! Lorem
 					ipsum dolor, sit amet consectetur adipisicing elit.
 				</DraggableWindow>
-				<DraggableWindow initialPos={{ x: 20, y: 20 }} classes="text-sm max-w-65">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet modi at
-					quaerat ab sequi quos quia recusandae. Esse perspiciatis recusandae ea
-					saepe consectetur rem autem sunt, sit itaque, dignissimos sint. Lorem
-					ipsum, dolor sit amet consectetur adipisicing elit.
-				</DraggableWindow>
-				<DraggableWindow initialPos={{ x: 300, y: 900 }}>
+				<DraggableWindow
+					classes="text-sm min-w-[280px]"
+					horizontalPosition={"far-left"}
+					distanceFromTop={20}
+					title={"Sit"}
+				>
 					{" "}
-					<div className="text-sm max-w-145 h-[50vh]">
+					<div className="overflow-y-scroll ">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet modi
+						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
+						recusandae ea saepe consectetur rem autem sunt, sit itaque,
+						dignissimos sint. Lorem ipsum, dolor sit amet consectetur
+						adipisicing elit.
+					</div>
+				</DraggableWindow>
+				<DraggableWindow
+					horizontalPosition={"center-left"}
+					distanceFromTop={770}
+					title={"Amet"}
+				>
+					<div className="text-sm h-[470px]">
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet modi
 						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
 						recusandae ea saepe consectetur rem autem sunt, sit itaque,
@@ -147,9 +163,12 @@ function App() {
 					</div>
 				</DraggableWindow>
 
-				<DraggableWindow initialPos={{ x: 300, y: 1450 }}>
-					{" "}
-					<div className="text-sm max-w-145 h-[40vh]">
+				<DraggableWindow
+					horizontalPosition={"center-left"}
+					distanceFromTop={1325}
+					title={"Consectetur"}
+				>
+					<div className="text-sm h-[375px]">
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet modi
 						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
 						recusandae ea saepe consectetur rem autem sunt, sit itaque,
@@ -161,9 +180,12 @@ function App() {
 					</div>
 				</DraggableWindow>
 
-				<DraggableWindow initialPos={{ x: window.innerWidth - 700, y: 900 }}>
-					{" "}
-					<div className="text-sm max-w-100 h-[30vh]">
+				<DraggableWindow
+					horizontalPosition={"center-right"}
+					distanceFromTop={900}
+					title={"Lorem"}
+				>
+					<div className="text-sm h-[285px]" title={"Adipisicing"}>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet modi
 						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
 						recusandae ea saepe consectetur rem autem sunt, sit itaque,
@@ -175,9 +197,12 @@ function App() {
 					</div>
 				</DraggableWindow>
 
-				<DraggableWindow initialPos={{ x: window.innerWidth - 700, y: 1260 }}>
-					{" "}
-					<div className="text-sm max-w-100 h-[60vh]">
+				<DraggableWindow
+					horizontalPosition={"center-right"}
+					distanceFromTop={1260}
+					title={"Ipsum"}
+				>
+					<div className="text-sm h-[565px]" title={"Elit"}>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet modi
 						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
 						recusandae ea saepe consectetur rem autem sunt, sit itaque,
@@ -191,23 +216,22 @@ function App() {
 
 				<DraggableWindow
 					title={"Main Window"}
-					initialPos={{ x: 300, y: 190 }}
+					horizontalPosition={"center"}
+					distanceFromTop={190}
 					notClosable={false}
 				>
-					<div className="md:w-150 lg:w-200 2xl:w-260">
-						<div className="h-[67vh] p-5">
-							<h1 className="text-3xl font-bold">Hello World!</h1>
-							<h2 className="text-lg italic">This is my page.</h2>
-							<div className="border border-sky-200 my-3"></div>
-							<div className="flex">
-								{[...Array(6)].map(() => (
-									<img
-										src="/img/construction.gif"
-										className="h-[22.25px]"
-									/>
-								))}
-							</div>
-						</div>
+					<div className="h-[500px] p-5">
+						<h1 className="text-3xl font-bold">Hello World!</h1>
+						<h2 className="text-lg italic">This is my page.</h2>
+						<div className="border border-sky-200 my-3"></div>
+						{/* <div className="flex flex-wrap">
+							{[...Array(6)].map(() => (
+								<img
+									src="/img/construction.gif"
+									className="h-[22.25px]"
+								/>
+							))}
+						</div> */}
 					</div>
 				</DraggableWindow>
 
@@ -234,10 +258,12 @@ function App() {
 					<img src="/img/jester2_right.png" className="h-70" alt="" />
 				</Draggable>
 
-				<DraggableWindow title={"Footer"} initialPos={{ x: 300, y: 1900 }}>
-					<div className="md:w-150 lg:w-200 2xl:w-250 mx-5 h-[10vh]">
-						<div className=""></div>
-					</div>
+				<DraggableWindow
+					title={"Footer"}
+					horizontalPosition={"center"}
+					distanceFromTop={1900}
+				>
+					<div className="h-[100px]"></div>
 				</DraggableWindow>
 				<Draggable initialPos={{ x: 20, y: 1090 }} shadow={true} material={true}>
 					<div className="w-65">
@@ -254,11 +280,12 @@ function App() {
 					</div>
 				</Draggable>
 				<DraggableWindow
-					initialPos={{ x: 30, y: 250 }}
+					horizontalPosition={"far-left"}
+					distanceFromTop={250}
 					title={"See you space cowboy..."}
 					noMargin={true}
 				>
-					<div className="w-60 h-30 p-7 bg-[url('../../../public/img/patterns/stars.gif')]"></div>
+					<div className="h-30 p-7 bg-[url('../../../public/img/patterns/stars.gif')]"></div>
 				</DraggableWindow>
 				<MovieReviews
 					isMoviesVisible={isMoviesVisible}
@@ -314,7 +341,7 @@ function App() {
 					noMargin={true}
 					initialPos={{
 						x: window.innerWidth / 2 - 250,
-						y: window.innerHeight / 2 - 270,
+						y: window.innerHeight / 2 - 170,
 					}}
 					shadow={"large"}
 				>
