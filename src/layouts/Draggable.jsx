@@ -17,6 +17,7 @@ export default function Draggable({
 	children,
 	classes,
 	material,
+	shadow,
 	...rest
 }) {
 	// position of the draggable element
@@ -34,6 +35,7 @@ export default function Draggable({
 	// the top z-index. so that the last moved (globally) is on top.
 	const [zIndexCounter, setZIndexCounter] = useContext(GlobalZIndexCounterContext);
 
+	// TODO: rotation is peeking out of viewport
 	useEffect(() => {
 		// when mouse moves...
 		function handleMouseMove(e) {
@@ -43,23 +45,20 @@ export default function Draggable({
 			function clamp(value, min, max) {
 				return Math.max(min, Math.min(value, max));
 			}
-			const topBarHeight = 28;
 			let newX = e.pageX - mouseAndElementOffset.current.x;
 			let newY = e.pageY - mouseAndElementOffset.current.y;
-			newX = clamp(
-				newX,
-				0,
-				window.innerWidth - nodeRef.current.getBoundingClientRect().width - 14,
-			);
-			newY = clamp(newY, 0, 2000 - topBarHeight);
 
+			const parentRect = nodeRef.current.parentElement.getBoundingClientRect();
+
+			const maxX = parentRect.width - nodeRef.current.getBoundingClientRect().width;
+			const maxY =
+				parentRect.height - nodeRef.current.getBoundingClientRect().height;
+
+			newX = clamp(newX, 0, maxX);
+			newY = clamp(newY, 0, maxY);
+
+			// if it is, change the position of the element, keeping in mind the offset
 			setPosition({ x: newX, y: newY });
-
-			// // if it is, change the position of the element, keeping in mind the offset
-			// setPosition({
-			// 	x: e.pageX - mouseAndElementOffset.current.x,
-			// 	y: e.pageY - mouseAndElementOffset.current.y,
-			// });
 
 			e.preventDefault();
 		}
@@ -73,7 +72,7 @@ export default function Draggable({
 			// tell the window to stop following the mouse
 			setIsDragging(false);
 
-			if (material) nodeRef.current.style.borderTopWidth = "0px";
+			if (material) nodeRef.current.style.scale = "1";
 
 			e.preventDefault();
 		}
@@ -102,19 +101,18 @@ export default function Draggable({
 
 		// getBoundingClientRect() returns a DOMRect object providing
 		// information about the size of an element and its position relative to the viewport.
-		const rect = nodeRef.current.getBoundingClientRect();
+		// const rect = nodeRef.current.getBoundingClientRect();
 
 		// set the element above everything else while the mouse is dragging
 		nodeRef.current.style.zIndex = 9999;
-		if (material) {
-			nodeRef.current.style.borderTopWidth = "10px";
-			nodeRef.current.style.borderColor = "transparent";
-		}
+		if (material) nodeRef.current.style.scale = "1.05";
 
 		// store the initial offset between the mouse position and the element’s top-left corner
 		mouseAndElementOffset.current = {
-			x: e.pageX - (rect.left + window.scrollX), // keeps the scroll in mind now
-			y: e.pageY - (rect.top + window.scrollY),
+			// x: e.pageX - (rect.left + window.scrollX), // keeps the scroll in mind now
+			// y: e.pageY - (rect.top + window.scrollY),
+			x: e.pageX - position.x,
+			y: e.pageY - position.y,
 		};
 
 		// mouse IS dragging!
@@ -133,18 +131,26 @@ export default function Draggable({
 				top: `${position.y}px`,
 				cursor: isDragging ? "grabbing" : "grab",
 				zIndex: 0, // initial z-index
+				transition: "all", // for scaling to be smooth
 			}}
 			className={classes}
 			{...rest}
 		>
 			{/* if it is a draggable with a handle, show top bar component and a children wrapper (passed as props) */}
 			{TopBarComponent !== undefined && ChildrenWrapperComponent !== undefined ? (
-				<>
+				<div
+					className={`${shadow ? (shadow === "large" ? "filter-[drop-shadow(3px_2px_10px_#000)]" : "filter-[drop-shadow(0_2px_2px_#000)]") : ""}`}
+				>
 					<TopBarComponent onMouseDown={onMouseDown} />
 					<ChildrenWrapperComponent>{children}</ChildrenWrapperComponent>
-				</>
+				</div>
 			) : (
-				<div onMouseDown={onMouseDown}>{children}</div>
+				<div
+					onMouseDown={onMouseDown}
+					className={`${shadow ? (shadow === "large" ? "filter-[drop-shadow(3px_2px_10px_#000)]" : "filter-[drop-shadow(0_2px_2px_#000)]") : ""}`}
+				>
+					{children}
+				</div>
 			)}
 		</div>
 	);

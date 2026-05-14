@@ -113,15 +113,23 @@ export default function Blinkies() {
 
 	return (
 		<div className="flex flex-col gap-1">
-			{blinkies.map((blinky) => (
-				<a href={blinky.url}>
+			{blinkies.map((blinky) =>
+				blinky.url ? (
+					<a href={blinky.url}>
+						<img
+							src={`img/blinkies/${blinky.img}`}
+							alt=""
+							className={`h-5 w-37.5 ${blinky.url ? "" : "cursor-default"}`}
+						/>
+					</a>
+				) : (
 					<img
 						src={`img/blinkies/${blinky.img}`}
 						alt=""
 						className={`h-5 w-37.5 ${blinky.url ? "" : "cursor-default"}`}
 					/>
-				</a>
-			))}
+				),
+			)}
 		</div>
 	);
 }

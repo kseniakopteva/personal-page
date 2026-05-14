@@ -74,11 +74,13 @@ function App() {
 
 	return (
 		<GlobalZIndexCounterContext value={zIndexCounterHook}>
-			<header
+			<main
 				style={{
 					position: "relative",
 					minHeight: "100vh",
-					height: "2000px",
+					height: "2077px",
+					backgroundImage: "url('../../../public/img/patterns/clovers.gif')",
+					backgroundRepeat: "repeat",
 				}}
 			>
 				<DraggableWindow
@@ -213,13 +215,15 @@ function App() {
 					noMargin={true}
 					initialPos={{ x: window.innerWidth - 650, y: 650 }}
 				>
-					<div className="relative">
-						<img src="/img/hallway_1.gif" alt="" className="w-100" />
-						<p className="absolute text-center top-[calc(50%-30px)] text-white left-[calc(50%-70px)] font-mono text-shadow-lg text-shadow-white">
-							Follow me <br />
-							into the dungeon
-						</p>
-					</div>
+					<a href="/dungeon">
+						<div className="relative">
+							<img src="/img/hallway_1.gif" alt="" className="w-100" />
+							<p className="absolute text-center top-[calc(50%-30px)] text-white left-[calc(50%-70px)] font-mono text-shadow-lg text-shadow-white">
+								Follow me <br />
+								into the dungeon
+							</p>
+						</div>
+					</a>
 				</DraggableWindow>
 
 				<Draggable
@@ -235,13 +239,18 @@ function App() {
 						<div className=""></div>
 					</div>
 				</DraggableWindow>
+				<Draggable initialPos={{ x: 20, y: 1090 }} shadow={true} material={true}>
+					<div className="w-65">
+						<img src="../img/bliss_poster.jpg" alt="" />
+					</div>
+				</Draggable>
 				<Draggable
 					initialPos={{ x: window.innerWidth - 350, y: 1600 }}
 					shadow={"large"}
 					material={true}
 				>
-					<div className="w-70 transform-[rotate(0.005turn)]">
-						<img src="../img/vans_ad.jpg" alt="" />
+					<div className="w-70 transform-[rotate(0.005turn)] border-10 border-b-20 border-white">
+						<img src="../img/ruins.jpg" alt="" />
 					</div>
 				</Draggable>
 				<DraggableWindow
@@ -309,7 +318,7 @@ function App() {
 					}}
 					shadow={"large"}
 				>
-					<pre className="w-[500px] h-[400px] whitespace-pre-wrap text-sm">
+					<pre className="w-125 h-100 whitespace-pre-wrap text-sm">
 						<p className="leading-4 mb-2">
 							Microsoft❮R❯ Windows DOS
 							<br />
@@ -353,7 +362,7 @@ function App() {
 						)}
 					</pre>
 				</DraggableWindow>
-			</header>
+			</main>
 			{fullscreenImage && (
 				<div
 					className="w-screen h-screen flex justify-center fixed top-0 left-0 items-center p-25 bg-[rgba(0,0,0,0.5)]"
