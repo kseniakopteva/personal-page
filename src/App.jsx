@@ -9,6 +9,7 @@ import CoolWebsiteLinks from "./components/CoolWebsiteLinks";
 import HeaderMarquee from "./components/HeaderMarquee";
 import Button from "./components/Button";
 import GifImage from "./components/GifImage";
+import WelcomeWindow from "./components/WelcomeWindow";
 
 function App() {
 	const zIndexCounterHook = useState(1);
@@ -61,16 +62,6 @@ function App() {
 			name: "Tree of Life, Melt in the Sun, Violet (singles but covers are similar...)",
 			img: "tree_of_life.jpg",
 		},
-	];
-
-	const welcomeText = [
-		"Hello there, fellow digital traveler.",
-		"I am pleased to see you here in my little corner of this vast Virtual Web.",
-		"I am glad you found me, and didn't get lost along the way.",
-		"",
-		"Relax and enjoy this cup of tea (or coffee.)",
-		"(Use the buttons in the top right of every window to collapse or close it.)",
-		"(To restore all: reload the page)",
 	];
 
 	return (
@@ -337,59 +328,7 @@ function App() {
 
 				<HeaderMarquee />
 
-				<DraggableWindow
-					title={"Command Prompt - Welcome :3"}
-					noMargin={true}
-					initialPos={{
-						x: window.innerWidth / 2 - 250,
-						y: window.innerHeight / 2 - 170,
-					}}
-					shadow={"large"}
-				>
-					<pre className="w-125 h-100 whitespace-pre-wrap text-sm">
-						<p className="leading-4 mb-2">
-							Microsoft❮R❯ Windows DOS
-							<br />
-							❮C❯ Copyright Microsoft Corp 1990-2001.
-						</p>
-						{welcomeText.map((paragraph) =>
-							paragraph !== "" ? (
-								<div className="flex">
-									<p>C:\WINDOWS\SYSTEM32{">"}</p>
-
-									<p className="ml-2 text-white filter-[drop-shadow(0_0_4px_#FFF)]">
-										{paragraph}
-									</p>
-								</div>
-							) : (
-								<p className="text-[0.3rem] flex justify-center text-[#00FF00]">
-									<br />
-									<br />
-									<br />
-									{"      "}██{"    "}██{"    "}██{"      "} <br />
-									{"    "}██{"      "}██{"  "}██{"        "} <br />
-									{"    "}██{"    "}██{"    "}██{"        "} <br />
-									{"      "}██{"  "}██{"      "}██{"      "} <br />
-									{"      "}██{"    "}██{"    "}██{"      "} <br />
-									{"                              "}
-									<br />
-									{"  "}████████████████████{"    "} <br />
-									{"  "}██{"                "}██████{""} <br />
-									{"  "}██{"                "}██{"  "}██{""} <br />
-									{"  "}██{"                "}██{"  "}██{""} <br />
-									{"  "}██{"                "}██████{""} <br />
-									{"    "}██{"            "}██{"      "} <br />
-									{""}████████████████████████{"  "} <br />
-									{""}██{"                    "}██{"  "} <br />
-									{"  "}████████████████████{"    "} <br />
-									<br />
-									<br />
-									<br />
-								</p>
-							),
-						)}
-					</pre>
-				</DraggableWindow>
+				<WelcomeWindow />
 			</main>
 			{fullscreenImage && (
 				<div
