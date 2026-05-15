@@ -4,10 +4,11 @@ export default function DraggableWindowBody({
 	setIsVisible,
 	okButton,
 	noMargin,
+	classes,
 }) {
 	return (
 		<div
-			className={`bg-white ${!noMargin ? "px-3" : ""} cursor-auto ${isOpen ? (!noMargin ? "visible py-3" : "visible") : "invisible h-0! py-0"} : ""}`}
+			className={`${classes} bg-white ${!noMargin ? "px-3" : ""} cursor-auto ${isOpen ? (!noMargin ? "visible py-3" : "visible") : "invisible h-0! py-0"} : ""}`}
 		>
 			{children}
 			{okButton && (

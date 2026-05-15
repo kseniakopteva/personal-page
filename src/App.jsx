@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Clock from "./components/Clock";
 import DraggableWindow from "./layouts/DraggableWindow";
-import { GlobalZIndexCounterContext } from "./contexts";
+import { GlobalZIndexCounterContext, ThemeContext } from "./contexts";
 import Draggable from "./layouts/Draggable";
 import MovieReviews from "./components/MovieReviews";
 import Blinkies from "./components/Blinkies";
@@ -12,7 +12,9 @@ import GifImage from "./components/GifImage";
 import WelcomeWindow from "./components/WelcomeWindow";
 
 function App() {
-	const zIndexCounterHook = useState(1);
+	const zIndexCounterHook = useContext(GlobalZIndexCounterContext);
+	const { themeMainBackgroundObject } = useContext(ThemeContext);
+
 	const [isMoviesVisible, setIsMoviesVisible] = useState(false);
 	const movieWindowRef = useRef();
 
@@ -65,13 +67,12 @@ function App() {
 	];
 
 	return (
-		<GlobalZIndexCounterContext value={zIndexCounterHook}>
+		<>
 			<main
 				style={{
 					position: "relative",
 					height: "2077px",
-					backgroundImage: "url('../../../public/img/patterns/clovers.gif')",
-					backgroundRepeat: "repeat",
+					...themeMainBackgroundObject,
 				}}
 			>
 				<DraggableWindow
@@ -349,7 +350,7 @@ function App() {
 					</button>
 				</div>
 			)}
-		</GlobalZIndexCounterContext>
+		</>
 	);
 }
 

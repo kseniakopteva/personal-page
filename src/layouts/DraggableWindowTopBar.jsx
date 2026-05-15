@@ -8,6 +8,7 @@ export default function DraggableWindowTopBar({
 	setIsOpen,
 	isVisible,
 	setIsVisible,
+	classes,
 }) {
 	function toggleOpen() {
 		setIsOpen(!isOpen);
@@ -18,30 +19,8 @@ export default function DraggableWindowTopBar({
 		setIsVisible(!isVisible);
 	}
 
-	const xp = true;
-
 	return (
-		<div
-			className={`min-h-3 border-y border-emerald-800 flex justify-between p-1 bg-emerald-600 ${xp ? "-mx-0.5" : ""}`}
-			style={
-				xp
-					? {
-							fontFamily: "Trebuchet MS",
-							background:
-								"linear-gradient(180deg, #0997ff, #0053ee 8%, #0050ee 40%, #06f 88%, #06f 93%, #005bff 95%, #003dd7 96%, #003dd7)",
-							padding: "3px 5px 3px 3px",
-							borderTop: "1px solid #0831d9",
-							borderLeft: "1px solid #0831d9",
-							borderRight: "1px solid #001ea0",
-							borderTopLeftRadius: "8px",
-							borderTopRightRadius: "7px",
-							fontSize: "13px",
-							textShadow: "1px 1px #0f1089",
-						}
-					: {}
-			}
-			onMouseDown={onMouseDown}
-		>
+		<div className={`${classes} flex justify-between`} onMouseDown={onMouseDown}>
 			<p
 				className="text-xs font-bold pl-2 py-0.5"
 				style={{

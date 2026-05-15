@@ -1,12 +1,15 @@
-export default function Button({ colorClass, onClick, children }) {
+import { useContext } from "react";
+import { ThemeContext } from "../contexts";
+
+export default function Button({ onClick, children }) {
+	const { themePrimaryButtonStyles } = useContext(ThemeContext);
+
 	return (
-		<button className={`xp-button cursor-pointer`} onClick={onClick}>
-			<div
-				className={`bg-${colorClass}d px-2 py-1 mix-blend-multiplyk
-        `}
-			>
-				{children}
-			</div>
+		<button
+			className={`${themePrimaryButtonStyles} cursor-pointer`}
+			onClick={onClick}
+		>
+			<div className={`px-2 py-1`}>{children}</div>
 		</button>
 	);
 }

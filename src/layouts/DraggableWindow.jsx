@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Draggable from "./Draggable";
 import DraggableWindowTopBar from "./DraggableWindowTopBar";
 import DraggableWindowBody from "./DraggableWindowBody";
+import { ThemeContext } from "../contexts";
 
 export default function DraggableWindow({
 	isVisible,
@@ -23,7 +24,13 @@ export default function DraggableWindow({
 
 	const [isOpen, setIsOpen] = useState(true);
 
-	const xp = true;
+	const {
+		themeWindowClasses,
+		themeTopBarClasses,
+		themeBodyClasses,
+		themeClosedBodyClasses,
+		themeOpenBodyClasses,
+	} = useContext(ThemeContext);
 
 	let distanceFromLeft = 0;
 	let width = 0;
@@ -70,7 +77,7 @@ export default function DraggableWindow({
 						: 0,
 			}}
 			shadow={shadow}
-			classes={`${classes} ${width} border border-black m-0 absolute shadow ${isOpen && xp ? "border-b rounded-b" : ""} ${finalIsVisible ? "block" : "hidden"}  pb-[3px] antialiased ${xp ? "px-[3px] rounded-t-[8px] shadow-[inset_-1px_-1px_#00138c,_inset_1px_1px_#0831d9,_inset_-2px_-2px_#001ea0,_inset_2px_2px_#166aee,_inset_-3px_-3px_#003bda,_inset_3px_3px_#0855dd]" : ""}`}
+			classes={`${classes} ${width} m-0 absolute shadow antialiased ${isOpen ? themeOpenBodyClasses : themeClosedBodyClasses} ${finalIsVisible ? "block" : "hidden"} ${themeWindowClasses}`}
 			{...props}
 			TopBarComponent={(props2) => (
 				<DraggableWindowTopBar
@@ -81,6 +88,7 @@ export default function DraggableWindow({
 					isVisible={finalIsVisible}
 					setIsVisible={setFinalIsVisible}
 					notClosable={notClosable}
+					classes={themeTopBarClasses}
 				/>
 			)}
 			ChildrenWrapperComponent={(props3) => (
@@ -91,6 +99,7 @@ export default function DraggableWindow({
 					isOpen={isOpen}
 					children={children}
 					okButton={okButton}
+					classes={themeBodyClasses}
 				/>
 			)}
 		/>
