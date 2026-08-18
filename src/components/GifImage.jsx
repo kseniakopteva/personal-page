@@ -9,7 +9,7 @@ export default function GifImage({
 	return (
 		<picture>
 			<source
-				srcset={`${srcSlugPath}.${copy}`}
+				srcSet={`${srcSlugPath}.${copy}`}
 				media="(prefers-reduced-motion: reduce)"
 			></source>
 			<img

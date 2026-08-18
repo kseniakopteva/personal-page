@@ -25,7 +25,7 @@ export default function WelcomeWindow() {
 			noMargin={true}
 			initialPos={{
 				x: window.innerWidth / 2 - 250,
-				y: window.innerHeight / 2 - 170,
+				y: window.innerHeight / 2 - 290,
 			}}
 			shadow={"large"}
 		>
@@ -35,9 +35,9 @@ export default function WelcomeWindow() {
 					<br />
 					❮C❯ Copyright Microsoft Corp 1990-2001.
 				</p>
-				{welcomeText.map((paragraph) =>
+				{welcomeText.map((paragraph, index) =>
 					paragraph !== "" ? (
-						<div className="flex">
+						<div className="flex" key={index}>
 							<p>C:\WINDOWS\SYSTEM32{">"}</p>
 
 							<p className="ml-2 text-white filter-[drop-shadow(0_0_4px_#FFF)]">
@@ -45,7 +45,10 @@ export default function WelcomeWindow() {
 							</p>
 						</div>
 					) : (
-						<p className="text-[0.3rem] flex justify-center text-[#00FF00]">
+						<p
+							className="text-[0.3rem] flex justify-center text-[#00FF00]"
+							key={index}
+						>
 							<br />
 							<br />
 							<br />

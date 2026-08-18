@@ -60,7 +60,7 @@ export default function CoolWebsiteLinks() {
 	return (
 		<div className=" flex gap-1 flex-wrap border p-6 [border-image-source:url(../../../img/fleabag.png)] [border-image-slice:77] [border-image-width:20]">
 			{allButtons.map((btn) => (
-				<a href={btn.url} target="_blank">
+				<a href={btn.url} target="_blank" key={btn.imageSlug}>
 					<GifImage
 						srcSlugPath={`img/buttons/${btn.imageSlug}`}
 						orig={btn.orig ? btn.orig : undefined}

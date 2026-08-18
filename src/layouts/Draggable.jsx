@@ -18,6 +18,7 @@ export default function Draggable({
 	classes,
 	material,
 	shadow,
+	toRotate = false,
 	...rest
 }) {
 	// position of the draggable element
@@ -34,6 +35,16 @@ export default function Draggable({
 
 	// the top z-index. so that the last moved (globally) is on top.
 	const [zIndexCounter, setZIndexCounter] = useContext(GlobalZIndexCounterContext);
+
+	function getRandomDegree() {
+		return ((Math.random() * 2 - 1) * 0.01).toFixed(3);
+	}
+	const [turnDegree, setTurnDegree] = useState(() => {
+		return toRotate ? getRandomDegree() : 0;
+	});
+	function rotate() {
+		if (rotate) setTurnDegree(getRandomDegree());
+	}
 
 	// TODO: rotation is peeking out of viewport
 	useEffect(() => {
@@ -73,6 +84,8 @@ export default function Draggable({
 			setIsDragging(false);
 
 			if (material) nodeRef.current.style.scale = "1";
+
+			if (toRotate) rotate();
 
 			e.preventDefault();
 		}
@@ -132,15 +145,14 @@ export default function Draggable({
 				cursor: isDragging ? "grabbing" : "grab",
 				zIndex: 0, // initial z-index
 				transition: "all", // for scaling to be smooth
+				transform: `rotate(${turnDegree}turn)`,
 			}}
-			className={classes}
+			className={`${classes} ${shadow ? (shadow === "large" ? "filter-[drop-shadow(3px_2px_10px_#000)]" : "filter-[drop-shadow(0_2px_2px_#000)]") : ""}`}
 			{...rest}
 		>
 			{/* if it is a draggable with a handle, show top bar component and a children wrapper (passed as props) */}
 			{TopBarComponent !== undefined && ChildrenWrapperComponent !== undefined ? (
-				<div
-					className={`${shadow ? (shadow === "large" ? "filter-[drop-shadow(3px_2px_10px_#000)]" : "filter-[drop-shadow(0_2px_2px_#000)]") : ""}`}
-				>
+				<div>
 					<TopBarComponent onMouseDown={onMouseDown} />
 					<ChildrenWrapperComponent>{children}</ChildrenWrapperComponent>
 				</div>

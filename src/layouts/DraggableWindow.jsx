@@ -30,6 +30,8 @@ export default function DraggableWindow({
 		themeBodyClasses,
 		themeClosedBodyClasses,
 		themeOpenBodyClasses,
+		themeTopBarOpenClasses,
+		themeTopBarClosedClasses,
 	} = useContext(ThemeContext);
 
 	let distanceFromLeft = 0;
@@ -77,7 +79,7 @@ export default function DraggableWindow({
 						: 0,
 			}}
 			shadow={shadow}
-			classes={`${classes} ${width} m-0 absolute shadow antialiased ${isOpen ? themeOpenBodyClasses : themeClosedBodyClasses} ${finalIsVisible ? "block" : "hidden"} ${themeWindowClasses}`}
+			classes={`${classes} ${width} m-0 absolute shadow antialiased  ${isOpen ? themeOpenBodyClasses : themeClosedBodyClasses} ${finalIsVisible ? "block" : "hidden"} ${themeWindowClasses}`}
 			{...props}
 			TopBarComponent={(props2) => (
 				<DraggableWindowTopBar
@@ -88,7 +90,7 @@ export default function DraggableWindow({
 					isVisible={finalIsVisible}
 					setIsVisible={setFinalIsVisible}
 					notClosable={notClosable}
-					classes={themeTopBarClasses}
+					classes={`${themeTopBarClasses} ${isOpen ? themeTopBarOpenClasses : themeTopBarClosedClasses}`}
 				/>
 			)}
 			ChildrenWrapperComponent={(props3) => (
@@ -99,7 +101,7 @@ export default function DraggableWindow({
 					isOpen={isOpen}
 					children={children}
 					okButton={okButton}
-					classes={themeBodyClasses}
+					classes={`${themeBodyClasses} overflow-auto`}
 				/>
 			)}
 		/>

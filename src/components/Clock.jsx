@@ -53,6 +53,7 @@ function AnalogClock({ time, size = 52 }) {
 
 	const arr = [
 		{
+			id: 1,
 			length: radius - 11,
 			width: 3,
 			offset: 2,
@@ -60,6 +61,7 @@ function AnalogClock({ time, size = 52 }) {
 			time: ((time.getHours() % 12) * 60 + time.getMinutes()) * 0.5,
 		},
 		{
+			id: 2,
 			length: radius - 6,
 			width: 2,
 			offset: 2,
@@ -67,6 +69,7 @@ function AnalogClock({ time, size = 52 }) {
 			time: (time.getMinutes() * 60 + time.getSeconds()) * 0.1,
 		},
 		{
+			id: 3,
 			length: radius - 1,
 			width: 2,
 			offset: 5,
@@ -86,6 +89,7 @@ function AnalogClock({ time, size = 52 }) {
 			>
 				{arr.map((elem) => (
 					<div
+						key={elem.id}
 						className={`${elem.styles} absolute`}
 						style={{
 							height: elem.length,

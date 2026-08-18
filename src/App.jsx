@@ -10,6 +10,7 @@ import HeaderMarquee from "./components/HeaderMarquee";
 import Button from "./components/Button";
 import GifImage from "./components/GifImage";
 import WelcomeWindow from "./components/WelcomeWindow";
+import Photocard from "./layouts/Photocard";
 
 function App() {
 	const zIndexCounterHook = useContext(GlobalZIndexCounterContext);
@@ -50,16 +51,14 @@ function App() {
 
 	const musicAlbums = [
 		{
+			id: 1,
 			artist: "Simon and Garfunkel",
 			name: "Parsley, Sage, Rosemary and Thyme",
 			img: "ParsleySage.jpg",
 		},
+		{ id: 2, artist: "ELO", name: "Time", img: "time.jpg" },
 		{
-			artist: "ELO",
-			name: "Time",
-			img: "time.jpg",
-		},
-		{
+			id: 3,
 			artist: "Small Fools",
 			name: "Tree of Life, Melt in the Sun, Violet (singles but covers are similar...)",
 			img: "tree_of_life.jpg",
@@ -125,13 +124,13 @@ function App() {
 					ipsum dolor, sit amet consectetur adipisicing elit.
 				</DraggableWindow>
 				<DraggableWindow
-					classes="text-sm min-w-[280px]"
+					classes="text-sm"
 					horizontalPosition={"far-left"}
 					distanceFromTop={20}
 					title={"Sit"}
 				>
 					{" "}
-					<div className="overflow-y-scroll ">
+					<div className="">
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet modi
 						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
 						recusandae ea saepe consectetur rem autem sunt, sit itaque,
@@ -228,7 +227,7 @@ function App() {
 					</div>
 				</DraggableWindow>
 
-				<DraggableWindow
+				{/* <DraggableWindow
 					noMargin={true}
 					initialPos={{ x: window.innerWidth - 650, y: 650 }}
 				>
@@ -241,15 +240,15 @@ function App() {
 							</p>
 						</div>
 					</a>
-				</DraggableWindow>
+				</DraggableWindow> */}
 
-				<Draggable
+				{/* <Draggable
 					initialPos={{ x: window.innerWidth - 710, y: 610 }}
 					shadow={true}
 					material={true}
 				>
 					<img src="/img/jester2_right.png" className="h-70" alt="" />
-				</Draggable>
+				</Draggable> */}
 
 				<DraggableWindow
 					title={"Footer"}
@@ -258,20 +257,28 @@ function App() {
 				>
 					<div className="h-[100px]"></div>
 				</DraggableWindow>
-				<Draggable initialPos={{ x: 20, y: 1090 }} shadow={true} material={true}>
+				<Draggable initialPos={{ x: 25, y: 1130 }} shadow={true} material={true}>
 					<div className="w-65">
 						<img src="../img/bliss_poster.jpg" alt="" />
 					</div>
 				</Draggable>
+
 				<Draggable
-					initialPos={{ x: window.innerWidth - 350, y: 1600 }}
-					shadow={"large"}
-					material={true}
+					src="../img/fleabag.png"
+					classes="w-60"
+					toRotate={true}
+					initialPos={{ x: window.innerWidth - 550, y: 1600 }}
+				/>
+
+				<DraggableWindow
+					horizontalPosition={"far-right"}
+					distanceFromTop={970}
+					title={"Wake up, Neo..."}
+					noMargin={true}
 				>
-					<div className="w-70 transform-[rotate(0.005turn)] border-10 border-b-20 border-white">
-						<img src="../img/ruins.jpg" alt="" />
-					</div>
-				</Draggable>
+					<div className="h-25 bg-[url('../../../public/img/digital_rain.gif')] bg-cover motion-reduce:bg-[url('../../../public/img/patterns/stars.jpg')]"></div>
+				</DraggableWindow>
+
 				<DraggableWindow
 					horizontalPosition={"far-left"}
 					distanceFromTop={250}
@@ -310,7 +317,10 @@ function App() {
 						</div>
 						<div className="flex gap-4 flex-wrap justify-between items-start p-3 ">
 							{musicAlbums.map((album) => (
-								<div className="w-35 text-xs font-mono text-center relative">
+								<div
+									className="w-35 text-xs font-mono text-center relative"
+									key={album.id}
+								>
 									<img
 										className="relative w-35 h-35 mb-2 [box-shadow:1px_1px_4px_0px_#000] border scale-100 hover:scale-[2.5] z-2 hover:z-4 transition-transform"
 										src={`/img/music/${album.img}`}
@@ -327,7 +337,56 @@ function App() {
 					</div>
 				</DraggableWindow>
 
-				<HeaderMarquee />
+				{/* <HeaderMarquee /> */}
+				<DraggableWindow
+					noMargin={true}
+					horizontalPosition={"center"}
+					distanceFromTop={20}
+					// classes="text-lg bg-emerald-200"
+				>
+					<div className="p-1 xl:p-2 2xl:p-3 gap-3 bg-repeat relative border border-white grid grid-cols-4 justify-center items-center bg-emerald-50">
+						<div className=" flex flex-col text-xs/tight">
+							hey :) call me senya. I made this website. if you like it, I
+							would be happy to hear from you - there is a message box on
+							the bottom of the page. Also, it would be really cool if you
+							shared my button on your website{" "}
+							<span className="italic text-slate-400">
+								(I don't have a button yet:P)
+							</span>
+						</div>
+						<div className="col-span-2 flex flex-col justify-center items-center">
+							<p className="italic text-3xl 2xl:text-4xl font-serif filter-[drop-shadow(2px_2px_0_#34d399)] font-bold">
+								· · ─ ·✶ WELCOME! ✶· ─ · ·
+							</p>
+							<nav className="flex gap-5 text-sm">
+								<a
+									href=""
+									className="underline font-bold hover:scale-108 hover:text-emerald-800"
+								>
+									Link 1
+								</a>
+								<a
+									href=""
+									className="underline font-bold hover:scale-108 hover:text-emerald-800"
+								>
+									Link 2
+								</a>
+								<a
+									href=""
+									className="underline font-bold hover:scale-108 hover:text-emerald-800"
+								>
+									Link 3
+								</a>
+							</nav>
+						</div>
+						<div className=" flex flex-col text-sm italic font-bold text-emerald-900 filter-[drop-shadow(0_0_3px_#6ee7b7)] text-right">
+							Dear fellow traveller <br />
+							under the moon <br /> I think I'm growing weary <br /> and I'm
+							hoping you'll come soon...
+							{/* Lorem ipsum dolor sit amet consectetur adipisicing */}
+						</div>
+					</div>
+				</DraggableWindow>
 
 				<WelcomeWindow />
 			</main>

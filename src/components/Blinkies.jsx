@@ -113,10 +113,10 @@ export default function Blinkies() {
 	];
 
 	return (
-		<div className="flex flex-col gap-1">
+		<div className="flex flex-col gap-1 items-center">
 			{blinkies.map((blinky) =>
 				blinky.url ? (
-					<a href={blinky.url}>
+					<a href={blinky.url} key={blinky.img}>
 						<GifImage
 							srcSlugPath={`img/blinkies/${blinky.img}`}
 							classes={`h-5 w-37.5`}
@@ -124,6 +124,7 @@ export default function Blinkies() {
 					</a>
 				) : (
 					<GifImage
+						key={blinky.img}
 						srcSlugPath={`img/blinkies/${blinky.img}`}
 						classes={`h-5 w-37.5`}
 					/>
