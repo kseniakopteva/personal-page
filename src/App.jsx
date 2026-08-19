@@ -11,6 +11,7 @@ import Button from "./components/Button";
 import GifImage from "./components/GifImage";
 import WelcomeWindow from "./components/WelcomeWindow";
 import Photocard from "./layouts/Photocard";
+import { createPortal } from "react-dom";
 
 function App() {
 	const zIndexCounterHook = useContext(GlobalZIndexCounterContext);
@@ -24,6 +25,14 @@ function App() {
 
 	const [fullscreenImage, setFullscreenImage] = useState("");
 	const dimWrapperRef = useRef(null);
+
+	function openFullscreen(path) {
+		setFullscreenImage(path);
+	}
+
+	function closeFullScreen() {
+		setFullscreenImage("");
+	}
 
 	function toggleMovieReviews() {
 		setIsMoviesVisible(!isMoviesVisible);
@@ -39,8 +48,11 @@ function App() {
 
 	useEffect(() => {
 		function handleClickOutside(event) {
-			if (dimWrapperRef.current && !dimWrapperRef.current.contains(event.target)) {
-				setFullscreenImage("");
+			if (
+				dimWrapperRef.current &&
+				!dimWrapperRef.current.contains(event.target)
+			) {
+				closeFullScreen();
 			}
 		}
 		document.addEventListener("mousedown", handleClickOutside);
@@ -148,10 +160,10 @@ function App() {
 						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
 						recusandae ea saepe consectetur rem autem sunt, sit itaque,
 						dignissimos sint. Lorem ipsum, dolor sit amet consectetur
-						adipisicing elit. Ex maxime cum porro. Asperiores fuga eius
-						adipisci expedita alias doloremque sint rerum, eum, saepe, maxime
-						quisquam iure ab ad eos veritatis! Lorem ipsum dolor, sit amet
-						consectetur adipisicing elit.
+						adipisicing elit. Ex maxime cum porro. Asperiores fuga eius adipisci
+						expedita alias doloremque sint rerum, eum, saepe, maxime quisquam
+						iure ab ad eos veritatis! Lorem ipsum dolor, sit amet consectetur
+						adipisicing elit.
 					</div>
 				</DraggableWindow>
 
@@ -165,10 +177,10 @@ function App() {
 						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
 						recusandae ea saepe consectetur rem autem sunt, sit itaque,
 						dignissimos sint. Lorem ipsum, dolor sit amet consectetur
-						adipisicing elit. Ex maxime cum porro. Asperiores fuga eius
-						adipisci expedita alias doloremque sint rerum, eum, saepe, maxime
-						quisquam iure ab ad eos veritatis! Lorem ipsum dolor, sit amet
-						consectetur adipisicing elit.
+						adipisicing elit. Ex maxime cum porro. Asperiores fuga eius adipisci
+						expedita alias doloremque sint rerum, eum, saepe, maxime quisquam
+						iure ab ad eos veritatis! Lorem ipsum dolor, sit amet consectetur
+						adipisicing elit.
 					</div>
 				</DraggableWindow>
 
@@ -182,10 +194,10 @@ function App() {
 						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
 						recusandae ea saepe consectetur rem autem sunt, sit itaque,
 						dignissimos sint. Lorem ipsum, dolor sit amet consectetur
-						adipisicing elit. Ex maxime cum porro. Asperiores fuga eius
-						adipisci expedita alias doloremque sint rerum, eum, saepe, maxime
-						quisquam iure ab ad eos veritatis! Lorem ipsum dolor, sit amet
-						consectetur adipisicing elit.
+						adipisicing elit. Ex maxime cum porro. Asperiores fuga eius adipisci
+						expedita alias doloremque sint rerum, eum, saepe, maxime quisquam
+						iure ab ad eos veritatis! Lorem ipsum dolor, sit amet consectetur
+						adipisicing elit.
 					</div>
 				</DraggableWindow>
 
@@ -199,10 +211,10 @@ function App() {
 						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
 						recusandae ea saepe consectetur rem autem sunt, sit itaque,
 						dignissimos sint. Lorem ipsum, dolor sit amet consectetur
-						adipisicing elit. Ex maxime cum porro. Asperiores fuga eius
-						adipisci expedita alias doloremque sint rerum, eum, saepe, maxime
-						quisquam iure ab ad eos veritatis! Lorem ipsum dolor, sit amet
-						consectetur adipisicing elit.
+						adipisicing elit. Ex maxime cum porro. Asperiores fuga eius adipisci
+						expedita alias doloremque sint rerum, eum, saepe, maxime quisquam
+						iure ab ad eos veritatis! Lorem ipsum dolor, sit amet consectetur
+						adipisicing elit.
 					</div>
 				</DraggableWindow>
 
@@ -257,7 +269,11 @@ function App() {
 				>
 					<div className="h-[100px]"></div>
 				</DraggableWindow>
-				<Draggable initialPos={{ x: 25, y: 1130 }} shadow={true} material={true}>
+				<Draggable
+					initialPos={{ x: 25, y: 1130 }}
+					shadow={true}
+					material={true}
+				>
 					<div className="w-65">
 						<img src="../img/bliss_poster.jpg" alt="" />
 					</div>
@@ -291,8 +307,8 @@ function App() {
 					isMoviesVisible={isMoviesVisible}
 					setIsMoviesVisible={setIsMoviesVisible}
 					movieWindowRef={movieWindowRef}
+					openFullscreen={openFullscreen}
 					fullscreenImage={fullscreenImage}
-					setFullscreenImage={setFullscreenImage}
 				/>
 
 				<DraggableWindow
@@ -310,9 +326,9 @@ function App() {
 								My Favorite Albums
 							</h2>
 							<span className="text-xs leading-3 text-right">
-								I love music, and I listen to different stuff every day.
-								This is more of a hall of fame for albums I can listen to
-								from the first song to the last.
+								I love music, and I listen to different stuff every day. This is
+								more of a hall of fame for albums I can listen to from the first
+								song to the last.
 							</span>
 						</div>
 						<div className="flex gap-4 flex-wrap justify-between items-start p-3 ">
@@ -346,10 +362,10 @@ function App() {
 				>
 					<div className="p-1 xl:p-2 2xl:p-3 gap-3 bg-repeat relative border border-white grid grid-cols-4 justify-center items-center bg-emerald-50">
 						<div className=" flex flex-col text-xs/tight">
-							hey :) call me senya. I made this website. if you like it, I
-							would be happy to hear from you - there is a message box on
-							the bottom of the page. Also, it would be really cool if you
-							shared my button on your website{" "}
+							hey :) call me senya. I made this website. if you like it, I would
+							be happy to hear from you - there is a message box on the bottom
+							of the page. Also, it would be really cool if you shared my button
+							on your website{" "}
 							<span className="italic text-slate-400">
 								(I don't have a button yet:P)
 							</span>
@@ -402,7 +418,8 @@ function App() {
 						className="h-full"
 					/>
 					<button
-						onClick={() => setFullscreenImage("")}
+						type="button"
+						onClick={() => closeFullScreen()}
 						className="absolute top-3 right-3 bg-white p-5 border cursor-pointer"
 					>
 						Close

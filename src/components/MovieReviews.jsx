@@ -1,33 +1,45 @@
 import { useState } from "react";
 import DraggableWindow from "../layouts/DraggableWindow";
 import FilmStrip from "../layouts/FilmStrip";
+import { movieReviews as mv } from "../data";
+import { isArrayEmpty } from "../util";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 export default function MovieReviews({
 	isMoviesVisible,
 	setIsMoviesVisible,
 	movieWindowRef,
+	openFullscreen,
 	fullscreenImage,
-	setFullscreenImage,
 }) {
 	const [activeMovie, setActiveMovie] = useState("");
 
-	const movieReviews = [
-		{
-			id: 0,
-			name: "Pretty Woman",
-			folder: "pretty-woman",
-			poster: "pretty_woman_movie.jpg",
-			year: 1990,
-			actors: ["Julia Roberts", "Richard Gere"],
-			body: "The sweetest movie I have seen recently. It is a fairytale that elicits warm, cozy feelings as well as the feeling of justice being served and the feeling of being loved. The way Richard Gere's character Edward looks at Julia Roberts's character Vivian is full of undeniable adoration and love, even when he doesn't yet realize it himself.",
-			rating: 5,
-			favorite_shots: ["7119487.webp", "7119618.webp", "7121377.webp"],
-			best_character: "",
-			best_moments: ["7120105.webp", "7120711.webp", "7121794.webp"],
-			first_seen: "27/02/26",
-			last_seen: "18/03/26",
-		},
-	];
+	const scrollable = useRef(null); // ref to elem that needs scroll restored after fullscreen
+	const savedScrollTop = useRef(null);
+
+	const movieReviews = mv;
+
+	function localOpenFullscreen(path) {
+		// saving the scroll position
+		savedScrollTop.current = scrollable.current.scrollTop;
+
+		openFullscreen(path);
+	}
+
+	// restore scroll position on fullscreen close
+	useEffect(() => {
+		if (!fullscreenImage && savedScrollTop.current !== null) {
+			scrollable.current.scrollTop = savedScrollTop.current;
+		}
+	}, [fullscreenImage]);
+
+	// restore scroll position on fullscreen open
+	useEffect(() => {
+		if (fullscreenImage && scrollable.current) {
+			scrollable.current.scrollTop = savedScrollTop.current;
+		}
+	}, [fullscreenImage]);
 
 	return (
 		<DraggableWindow
@@ -44,9 +56,10 @@ export default function MovieReviews({
 					<h2 className="text-xl font-bold">My Movie Reviews</h2>
 					<ul className="overflow-y-scroll min-h-0 h-full">
 						{movieReviews.map((review) => (
-							<li
+							<button
+								type="button"
 								key={review.id}
-								className={`mt-2 flex gap-3 cursor-pointer items-center  px-2 py-1 transition-all min-h-0 ${review.id === activeMovie.id ? "bg-slate-200" : "hover:bg-slate-100"}`}
+								className={`w-full mt-2 text-left flex gap-3 cursor-pointer items-center  px-2 py-1 transition-all min-h-0 ${review.id === activeMovie.id ? "bg-slate-200" : "hover:bg-slate-100"}`}
 								onClick={() => {
 									setActiveMovie(review);
 								}}
@@ -60,23 +73,24 @@ export default function MovieReviews({
 								</div>
 								<div className=" min-h-0">
 									<h3 className="text-lg font-bold">{review.name}</h3>
-									<p className="text-xs">{review.body.substr(0, 33)}</p>
 									<p className="text-xs">
-										{review.body.substr(33, 36)}...
+										{review.body?.join(" ").substr(0, 33)}
+									</p>
+									<p className="text-xs">
+										{review.body?.join(" ").substr(33, 36)}...
 									</p>
 								</div>
-							</li>
+							</button>
 						))}
 					</ul>
 				</div>
 				{activeMovie ? (
-					<div className="flex-1 overflow-y-scroll w-150">
+					<div ref={scrollable} className="flex-1 overflow-y-scroll w-150">
 						<div className="flex justify-between items-start">
 							<div className="flex-1">
 								<h3 className="text-lg font-bold">{activeMovie.name}</h3>
 								<p>
-									Year:{" "}
-									<span className="font-bold">{activeMovie.year}</span>
+									Year: <span className="font-bold">{activeMovie.year}</span>
 								</p>
 								<p>
 									Main actors:{" "}
@@ -95,58 +109,91 @@ export default function MovieReviews({
 									Rating:{" "}
 									<span className="text-amber-500">
 										{"★".repeat(activeMovie.rating)}
+										{"☆".repeat(5 - activeMovie.rating)}
 									</span>
 								</p>
 							</div>
-							<img
+							<button
+								type="button"
 								onClick={() =>
-									setFullscreenImage(
+									localOpenFullscreen(
 										`reviews/${activeMovie.folder}/${activeMovie.poster}`,
 									)
 								}
-								src={`public/img/reviews/${activeMovie.folder}/${activeMovie.poster}`}
-								alt=""
-								className="border mr-3 border-gray-700 box-content [box-shadow:3px_3px_3px_0_#000000] h-40 cursor-pointer"
-							/>
+							>
+								<img
+									src={`public/img/reviews/${activeMovie.folder}/${activeMovie.poster}`}
+									alt=""
+									className="border mr-3 border-gray-700 box-content [box-shadow:3px_3px_3px_0_#000000] h-40 cursor-pointer"
+								/>
+							</button>
 						</div>
 
-						<p className="text-sm my-5">{activeMovie.body}</p>
-						<h4 className="font-bold italic mt-2">Best shots</h4>
-						<div className="flex flex-wrap">
-							{activeMovie.favorite_shots?.map((shot, index) => (
-								<FilmStrip classes="border-2 m-0.5">
-									<img
-										src={`public/img/reviews/${activeMovie.folder}/${shot}`}
-										alt=""
-										className="w-37 h-21 cursor-pointer"
-										key={index}
-										onClick={() =>
-											setFullscreenImage(
-												`reviews/${activeMovie.folder}/${shot}`,
-											)
-										}
-									/>
-								</FilmStrip>
-							))}
-						</div>
-						<h4 className="font-bold italic mt-2">Best moments</h4>
-						<div className="flex flex-wrap">
-							{activeMovie.best_moments?.map((shot, index) => (
-								<FilmStrip classes="border-2 m-0.5">
-									<img
-										src={`public/img/reviews/${activeMovie.folder}/${shot}`}
-										alt=""
-										className="w-37 h-21 cursor-pointer"
-										key={index}
-										onClick={() =>
-											setFullscreenImage(
-												`reviews/${activeMovie.folder}/${shot}`,
-											)
-										}
-									/>
-								</FilmStrip>
-							))}
-						</div>
+						{!isArrayEmpty(activeMovie.body) && (
+							<div>
+								{activeMovie.body.map((par, index) => (
+									<p className="text-sm my-5" key={index}>
+										{par}
+										<br />
+									</p>
+								))}
+							</div>
+						)}
+						{/* <p className="text-sm my-5">{activeMovie.body}</p> */}
+
+						{!isArrayEmpty(activeMovie.favorite_shots) && (
+							<div>
+								<h4 className="font-bold italic mt-2">Best shots</h4>
+								<div className="flex flex-wrap">
+									{activeMovie.favorite_shots?.map((shot, index) => (
+										<button
+											type="button"
+											key={index}
+											onClick={() =>
+												localOpenFullscreen(
+													`reviews/${activeMovie.folder}/${shot}`,
+												)
+											}
+										>
+											<FilmStrip classes="border-2 m-0.5">
+												<img
+													src={`public/img/reviews/${activeMovie.folder}/${shot}`}
+													alt=""
+													className="w-37 h-21 cursor-pointer"
+												/>
+											</FilmStrip>
+										</button>
+									))}
+								</div>
+							</div>
+						)}
+
+						{!isArrayEmpty(activeMovie.best_moments) && (
+							<div>
+								<h4 className="font-bold italic mt-2">Best moments</h4>
+								<div className="flex flex-wrap">
+									{activeMovie.best_moments?.map((shot, index) => (
+										<button
+											key={index}
+											type="button"
+											onClick={() => {
+												localOpenFullscreen(
+													`reviews/${activeMovie.folder}/${shot}`,
+												);
+											}}
+										>
+											<FilmStrip classes="border-2 m-0.5">
+												<img
+													src={`public/img/reviews/${activeMovie.folder}/${shot}`}
+													alt=""
+													className="w-37 h-21 cursor-pointer"
+												/>
+											</FilmStrip>
+										</button>
+									))}
+								</div>
+							</div>
+						)}
 					</div>
 				) : (
 					<div className="text-sm italic h-full flex-1 flex justify-center items-center  w-150">

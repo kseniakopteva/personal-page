@@ -12,19 +12,19 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
 
-const DungeonLazyRouteImport = createFileRoute('/dungeon')()
 const IndexLazyRouteImport = createFileRoute('/')()
+const DungeonLazyRouteImport = createFileRoute('/dungeon')()
 
-const DungeonLazyRoute = DungeonLazyRouteImport.update({
-  id: '/dungeon',
-  path: '/dungeon',
-  getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/dungeon.lazy').then((d) => d.Route))
 const IndexLazyRoute = IndexLazyRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+const DungeonLazyRoute = DungeonLazyRouteImport.update({
+  id: '/dungeon',
+  path: '/dungeon',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/dungeon.lazy').then((d) => d.Route))
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
@@ -54,18 +54,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/dungeon': {
-      id: '/dungeon'
-      path: '/dungeon'
-      fullPath: '/dungeon'
-      preLoaderRoute: typeof DungeonLazyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dungeon': {
+      id: '/dungeon'
+      path: '/dungeon'
+      fullPath: '/dungeon'
+      preLoaderRoute: typeof DungeonLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
