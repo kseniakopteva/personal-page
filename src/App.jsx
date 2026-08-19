@@ -12,6 +12,8 @@ import GifImage from "./components/GifImage";
 import WelcomeWindow from "./components/WelcomeWindow";
 import Photocard from "./layouts/Photocard";
 import { createPortal } from "react-dom";
+import Tarot from "./components/Tarot";
+import { intro } from "./data";
 
 function App() {
 	const zIndexCounterHook = useContext(GlobalZIndexCounterContext);
@@ -124,16 +126,11 @@ function App() {
 				<DraggableWindow
 					horizontalPosition={"far-left"}
 					distanceFromTop={426}
-					title={"Dolor"}
+					title={"Tarot"}
 					classes="text-sm"
+					noMargin={true}
 				>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet modi at
-					quaerat ab sequi quos quia recusandae. Esse perspiciatis recusandae ea
-					saepe consectetur rem autem sunt, sit itaque, dignissimos sint. Lorem
-					ipsum, dolor sit amet consectetur adipisicing elit. Ex maxime cum
-					porro. Asperiores fuga eius adipisci expedita alias doloremque sint
-					rerum, eum, saepe, maxime quisquam iure ab ad eos veritatis! Lorem
-					ipsum dolor, sit amet consectetur adipisicing elit.
+					<Tarot />
 				</DraggableWindow>
 				<DraggableWindow
 					classes="text-sm"
@@ -228,40 +225,44 @@ function App() {
 						<h1 className="text-3xl font-bold">Hello World!</h1>
 						<h2 className="text-lg italic">This is my page.</h2>
 						<div className="border border-sky-200 my-3"></div>
-						{/* <div className="flex flex-wrap">
-							{[...Array(6)].map(() => (
+						<div className="flex flex-wrap">
+							{[...Array(6)].map((index) => (
 								<img
+									key={index}
 									src="/img/construction.gif"
-									className="h-[22.25px]"
+									className="h-[21.93px]"
+									alt="under construction blinkie"
 								/>
 							))}
-						</div> */}
+						</div>
 					</div>
 				</DraggableWindow>
 
-				{/* <DraggableWindow
+				<DraggableWindow
 					noMargin={true}
-					initialPos={{ x: window.innerWidth - 650, y: 650 }}
+					offset={50}
+					// initialPos={{ x: window.innerWidth - 650, y: 650 }}
+					horizontalPosition={"center-right"}
+					distanceFromTop={600}
 				>
 					<a href="/dungeon">
 						<div className="relative">
-							<GifImage srcSlugPath={"/img/hallway_1"} classes="w-100" />
+							<GifImage srcSlugPath={"/img/hallway_1"} classes="w-full" />
 							<p className="absolute text-center top-[calc(50%-30px)] text-white left-[calc(50%-70px)] font-mono text-shadow-lg text-shadow-white">
 								Follow me <br />
 								into the dungeon
 							</p>
 						</div>
 					</a>
-				</DraggableWindow> */}
+				</DraggableWindow>
 
-				{/* <Draggable
+				<Draggable
 					initialPos={{ x: window.innerWidth - 710, y: 610 }}
 					shadow={true}
 					material={true}
 				>
 					<img src="/img/jester2_right.png" className="h-70" alt="" />
-				</Draggable> */}
-
+				</Draggable>
 				<DraggableWindow
 					title={"Footer"}
 					horizontalPosition={"center"}
@@ -295,14 +296,14 @@ function App() {
 					<div className="h-25 bg-[url('../../../public/img/digital_rain.gif')] bg-cover motion-reduce:bg-[url('../../../public/img/patterns/stars.jpg')]"></div>
 				</DraggableWindow>
 
-				<DraggableWindow
+				{/* <DraggableWindow
 					horizontalPosition={"far-left"}
 					distanceFromTop={250}
 					title={"See you space cowboy..."}
 					noMargin={true}
 				>
 					<div className="h-30 p-7 bg-[url('../../../public/img/patterns/stars.gif')] motion-reduce:bg-[url('../../../public/img/patterns/stars.jpg')]"></div>
-				</DraggableWindow>
+				</DraggableWindow> */}
 				<MovieReviews
 					isMoviesVisible={isMoviesVisible}
 					setIsMoviesVisible={setIsMoviesVisible}
@@ -311,7 +312,7 @@ function App() {
 					fullscreenImage={fullscreenImage}
 				/>
 
-				<DraggableWindow
+				{/* <DraggableWindow
 					ref={musicWindowRef}
 					initialPos={{
 						x: 400,
@@ -351,7 +352,7 @@ function App() {
 							))}
 						</div>
 					</div>
-				</DraggableWindow>
+				</DraggableWindow> */}
 
 				{/* <HeaderMarquee /> */}
 				<DraggableWindow
@@ -361,15 +362,7 @@ function App() {
 					// classes="text-lg bg-emerald-200"
 				>
 					<div className="p-1 xl:p-2 2xl:p-3 gap-3 bg-repeat relative border border-white grid grid-cols-4 justify-center items-center bg-emerald-50">
-						<div className=" flex flex-col text-xs/tight">
-							hey :) call me senya. I made this website. if you like it, I would
-							be happy to hear from you - there is a message box on the bottom
-							of the page. Also, it would be really cool if you shared my button
-							on your website{" "}
-							<span className="italic text-slate-400">
-								(I don't have a button yet:P)
-							</span>
-						</div>
+						<div className=" flex flex-col text-xs/tight">{intro}</div>
 						<div className="col-span-2 flex flex-col justify-center items-center">
 							<p className="italic text-3xl 2xl:text-4xl font-serif filter-[drop-shadow(2px_2px_0_#34d399)] font-bold">
 								· · ─ ·✶ WELCOME! ✶· ─ · ·

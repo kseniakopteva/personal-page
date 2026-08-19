@@ -51,7 +51,7 @@ export default function MovieReviews({
 				y: 260,
 			}}
 		>
-			<div className="flex gap-5 h-[400px]">
+			<div className="flex gap-5 h-100">
 				<div className="m-1 min-h-0 flex flex-col">
 					<h2 className="text-xl font-bold">My Movie Reviews</h2>
 					<ul className="overflow-y-scroll min-h-0 h-full">
@@ -71,8 +71,17 @@ export default function MovieReviews({
 										className="border border-gray-700 box-content shadow"
 									/>
 								</div>
-								<div className=" min-h-0">
+								<div className=" min-h-0 flex-1">
 									<h3 className="text-lg font-bold">{review.name}</h3>
+									<div className="flex justify-between items-center">
+										<p className="text-xs text-slate-400">
+											{review.created_at}
+										</p>
+										<span className="text-amber-500">
+											{"★".repeat(review.rating)}
+											{"☆".repeat(5 - review.rating)}
+										</span>
+									</div>
 									<p className="text-xs">
 										{review.body?.join(" ").substr(0, 33)}
 									</p>

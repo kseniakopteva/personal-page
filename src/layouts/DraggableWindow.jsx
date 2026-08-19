@@ -16,6 +16,7 @@ export default function DraggableWindow({
 	shadow,
 	horizontalPosition = null, // far-left, center, far-right, center-left, center-right
 	distanceFromTop = null,
+	offset = 0,
 	...props
 }) {
 	const [internalIsVisible, setInternalIsVisible] = useState(true);
@@ -38,27 +39,27 @@ export default function DraggableWindow({
 	let width = 0;
 	switch (horizontalPosition) {
 		case "far-left": {
-			distanceFromLeft = 0.01 * window.innerWidth;
+			distanceFromLeft = 0.01 * window.innerWidth + offset;
 			width = "w-[18%]";
 			break;
 		}
 		case "center": {
-			distanceFromLeft = 0.2 * window.innerWidth;
+			distanceFromLeft = 0.2 * window.innerWidth + offset;
 			width = "w-[65%]";
 			break;
 		}
 		case "far-right": {
-			distanceFromLeft = 0.86 * window.innerWidth;
+			distanceFromLeft = 0.86 * window.innerWidth + offset;
 			width = "w-[12%]";
 			break;
 		}
 		case "center-left": {
-			distanceFromLeft = 0.2 * window.innerWidth;
+			distanceFromLeft = 0.2 * window.innerWidth + offset;
 			width = "w-[32%]";
 			break;
 		}
 		case "center-right": {
-			distanceFromLeft = 0.53 * window.innerWidth;
+			distanceFromLeft = 0.53 * window.innerWidth + offset;
 			width = "w-[32%]";
 			break;
 		}
