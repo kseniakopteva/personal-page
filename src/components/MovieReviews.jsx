@@ -10,7 +10,7 @@ export default function MovieReviews({
 	isMoviesVisible,
 	setIsMoviesVisible,
 	movieWindowRef,
-	openFullscreen,
+	setFullscreenImage,
 	fullscreenImage,
 }) {
 	const [activeMovie, setActiveMovie] = useState("");
@@ -24,7 +24,7 @@ export default function MovieReviews({
 		// saving the scroll position
 		savedScrollTop.current = scrollable.current.scrollTop;
 
-		openFullscreen(path);
+		setFullscreenImage(path);
 	}
 
 	// restore scroll position on fullscreen close

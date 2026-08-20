@@ -201,7 +201,8 @@
 
 .crt {
     /* animation: textShadow 1.6s infinite; */
-    /* position: fixed; */
+    position: sticky;
     /* height: 222vh; */
-    height: 2077px;
+    /* height: 2077px; */
+    height: 100%;
 }

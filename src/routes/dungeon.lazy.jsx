@@ -9,7 +9,7 @@ function DungeonRoute() {
 		<main
 			style={{
 				position: "relative",
-				height: "2077px",
+				// height: "2077px",
 				backgroundImage: "url('/img/patterns/cobblestone_1.gif')",
 				backgroundRepeat: "repeat",
 			}}

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Clock from "./components/Clock";
 import DraggableWindow from "./layouts/DraggableWindow";
 import { GlobalZIndexCounterContext, ThemeContext } from "./contexts";
@@ -13,8 +13,10 @@ import WelcomeWindow from "./components/WelcomeWindow";
 import Photocard from "./layouts/Photocard";
 import { createPortal } from "react-dom";
 import Tarot from "./components/Tarot";
-import { intro, musicAlbums as mb } from "./data";
+import { artPieces, intro, musicAlbums as mb } from "./data";
 import Footer from "./components/Footer";
+import FullscreenImage from "./components/FullscreenImage";
+import { getRandomInt } from "./util";
 
 function App() {
 	const zIndexCounterHook = useContext(GlobalZIndexCounterContext);
@@ -27,15 +29,6 @@ function App() {
 	const musicWindowRef = useRef();
 
 	const [fullscreenImage, setFullscreenImage] = useState("");
-	const dimWrapperRef = useRef(null);
-
-	function openFullscreen(path) {
-		setFullscreenImage(path);
-	}
-
-	function closeFullScreen() {
-		setFullscreenImage("");
-	}
 
 	function toggleMovieReviews() {
 		setIsMoviesVisible(!isMoviesVisible);
@@ -49,20 +42,9 @@ function App() {
 		zIndexCounterHook[1](zIndexCounterHook[0] + 1);
 	}
 
-	useEffect(() => {
-		function handleClickOutside(event) {
-			if (
-				dimWrapperRef.current &&
-				!dimWrapperRef.current.contains(event.target)
-			) {
-				closeFullScreen();
-			}
-		}
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
-		};
-	}, [dimWrapperRef]);
+	const [paintingID] = useState(getRandomInt(1, 13));
+	// const paintingID = getRandomInt(1, 13);
+	const painting = artPieces.find((painting) => painting.id === paintingID);
 
 	const musicAlbums = mb;
 
@@ -122,17 +104,36 @@ function App() {
 				<DraggableWindow
 					horizontalPosition={"far-left"}
 					distanceFromTop={20}
-					title={"Kuindzhi_After_a_rain_1879.jpg"}
+					title={"Art Gallery"}
 					noMargin={true}
 				>
-					<div className="w-full">
-						<img
-							className="w-full"
-							src="/public/img/1920px-Kuindzhi_After_a_rain_1879.jpg"
-							alt=""
-						/>
+					<div className="w-full h-90 p-3 bg-[url('../../../public/img/patterns/red.webp')] bg-size-[100%_auto] bg-center flex flex-col justify-center items-center">
+						<a href="/art-gallery">
+							<img
+								className="max-h-50 border-18 [border-image:url(/img/borders/frame1.png)_18_round]"
+								src={`/img/art/${painting.image}`}
+								alt=""
+							/>
+						</a>
+						<div className="bg-stone-400 mt-3 border-l-2 border-t-2 border-stone-200 [box-shadow:inset_-2px_-2px_0px_rgba(0,0,0,0.25)] text-amber-950 font-serif rounded-xs p-2 mb-5 text-xs/tight max-w-62 drop-shadow-[0px_0px_2px_#000]">
+							{painting.author} <br />
+							<span className="font-bold text-xs">
+								{painting.title.slice(0, 51)}
+								{painting.title.length > 51 ? "..." : ""}
+							</span>
+							, {painting.year} <br />
+							<br />
+							{painting.medium} <br />
+						</div>
+						<a
+							href="/art-gallery"
+							className="text-white underline text-shadow font-bold font-italic text-shadow-md text-shadow-white/50"
+						>
+							VISIT THE ART GALLERY NOW
+						</a>
 					</div>
 				</DraggableWindow>
+
 				<DraggableWindow
 					horizontalPosition={"center-left"}
 					distanceFromTop={770}
@@ -287,19 +288,11 @@ function App() {
 					<div className="h-25 bg-[url('../../../public/img/digital_rain.gif')] bg-cover motion-reduce:bg-[url('../../../public/img/patterns/stars.jpg')]"></div>
 				</DraggableWindow>
 
-				{/* <DraggableWindow
-					horizontalPosition={"far-left"}
-					distanceFromTop={250}
-					title={"See you space cowboy..."}
-					noMargin={true}
-				>
-					<div className="h-30 p-7 bg-[url('../../../public/img/patterns/stars.gif')] motion-reduce:bg-[url('../../../public/img/patterns/stars.jpg')]"></div>
-				</DraggableWindow> */}
 				<MovieReviews
 					isMoviesVisible={isMoviesVisible}
 					setIsMoviesVisible={setIsMoviesVisible}
 					movieWindowRef={movieWindowRef}
-					openFullscreen={openFullscreen}
+					setFullscreenImage={setFullscreenImage}
 					fullscreenImage={fullscreenImage}
 				/>
 
@@ -394,26 +387,10 @@ function App() {
 
 				<WelcomeWindow />
 			</main>
-			{fullscreenImage && (
-				<div
-					className="w-screen h-screen flex justify-center fixed top-0 left-0 items-center p-25 bg-[rgba(0,0,0,0.5)]"
-					style={{ zIndex: 99998 }}
-				>
-					<img
-						ref={dimWrapperRef}
-						src={`public/img/${fullscreenImage}`}
-						alt=""
-						className="h-full"
-					/>
-					<button
-						type="button"
-						onClick={() => closeFullScreen()}
-						className="absolute top-3 right-3 bg-white p-5 border cursor-pointer"
-					>
-						Close
-					</button>
-				</div>
-			)}
+			<FullscreenImage
+				fullscreenImage={fullscreenImage}
+				setFullscreenImage={setFullscreenImage}
+			/>
 		</>
 	);
 }

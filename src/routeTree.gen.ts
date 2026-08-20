@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRouteImport } from './routes/__root'
 
 const IndexLazyRouteImport = createFileRoute('/')()
+const ArtGalleryLazyRouteImport = createFileRoute('/art-gallery')()
 const DungeonLazyRouteImport = createFileRoute('/dungeon')()
 
 const IndexLazyRoute = IndexLazyRouteImport.update({
@@ -20,6 +21,11 @@ const IndexLazyRoute = IndexLazyRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+const ArtGalleryLazyRoute = ArtGalleryLazyRouteImport.update({
+  id: '/art-gallery',
+  path: '/art-gallery',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/art-gallery.lazy').then((d) => d.Route))
 const DungeonLazyRoute = DungeonLazyRouteImport.update({
   id: '/dungeon',
   path: '/dungeon',
@@ -28,27 +34,31 @@ const DungeonLazyRoute = DungeonLazyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
+  '/art-gallery': typeof ArtGalleryLazyRoute
   '/dungeon': typeof DungeonLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
+  '/art-gallery': typeof ArtGalleryLazyRoute
   '/dungeon': typeof DungeonLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexLazyRoute
+  '/art-gallery': typeof ArtGalleryLazyRoute
   '/dungeon': typeof DungeonLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dungeon'
+  fullPaths: '/' | '/art-gallery' | '/dungeon'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dungeon'
-  id: '__root__' | '/' | '/dungeon'
+  to: '/' | '/art-gallery' | '/dungeon'
+  id: '__root__' | '/' | '/art-gallery' | '/dungeon'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
+  ArtGalleryLazyRoute: typeof ArtGalleryLazyRoute
   DungeonLazyRoute: typeof DungeonLazyRoute
 }
 
@@ -59,6 +69,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/art-gallery': {
+      id: '/art-gallery'
+      path: '/art-gallery'
+      fullPath: '/art-gallery'
+      preLoaderRoute: typeof ArtGalleryLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dungeon': {
@@ -73,6 +90,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
+  ArtGalleryLazyRoute: ArtGalleryLazyRoute,
   DungeonLazyRoute: DungeonLazyRoute,
 }
 export const routeTree = rootRouteImport
