@@ -6,6 +6,8 @@ import { tarotCards } from "../data";
 import { useRef } from "react";
 
 export default function Tarot() {
+	// TODO: make reduced motion version
+
 	const [status, setStatus] = useState("initial");
 	const [card, setCard] = useState(null);
 	const [areReversed, setAreReversed] = useState(false);
@@ -84,7 +86,7 @@ export default function Tarot() {
 						<div className="perspective-[1000px]">
 							<div className="transform-3d tarot-tumble">
 								<img
-									className="h-45 mb-2 mt-5"
+									className="h-45 mb-2 mt-5 border-2 border-white rounded-lg"
 									src={`/img/tarot/cover.webp`}
 									alt=""
 								/>
@@ -113,7 +115,7 @@ export default function Tarot() {
 							<div className="perspective-[1000px]">
 								<img
 									className={clsx(
-										"h-45 my-2 transform-3d tarot-rocking cursor-pointer",
+										"h-45 my-2 transform-3d tarot-rocking cursor-pointer border-2 border-white rounded-lg",
 										isCurrentReversed ? "rotate-180" : "",
 									)}
 									src={`/img/tarot/${card.id}.webp`}

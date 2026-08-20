@@ -13,7 +13,8 @@ import WelcomeWindow from "./components/WelcomeWindow";
 import Photocard from "./layouts/Photocard";
 import { createPortal } from "react-dom";
 import Tarot from "./components/Tarot";
-import { intro } from "./data";
+import { intro, musicAlbums as mb } from "./data";
+import Footer from "./components/Footer";
 
 function App() {
 	const zIndexCounterHook = useContext(GlobalZIndexCounterContext);
@@ -63,21 +64,7 @@ function App() {
 		};
 	}, [dimWrapperRef]);
 
-	const musicAlbums = [
-		{
-			id: 1,
-			artist: "Simon and Garfunkel",
-			name: "Parsley, Sage, Rosemary and Thyme",
-			img: "ParsleySage.jpg",
-		},
-		{ id: 2, artist: "ELO", name: "Time", img: "time.jpg" },
-		{
-			id: 3,
-			artist: "Small Fools",
-			name: "Tree of Life, Melt in the Sun, Violet (singles but covers are similar...)",
-			img: "tree_of_life.jpg",
-		},
-	];
+	const musicAlbums = mb;
 
 	return (
 		<>
@@ -133,18 +120,17 @@ function App() {
 					<Tarot />
 				</DraggableWindow>
 				<DraggableWindow
-					classes="text-sm"
 					horizontalPosition={"far-left"}
 					distanceFromTop={20}
-					title={"Sit"}
+					title={"Kuindzhi_After_a_rain_1879.jpg"}
+					noMargin={true}
 				>
-					{" "}
-					<div className="">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet modi
-						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
-						recusandae ea saepe consectetur rem autem sunt, sit itaque,
-						dignissimos sint. Lorem ipsum, dolor sit amet consectetur
-						adipisicing elit.
+					<div className="w-full">
+						<img
+							className="w-full"
+							src="/public/img/1920px-Kuindzhi_After_a_rain_1879.jpg"
+							alt=""
+						/>
 					</div>
 				</DraggableWindow>
 				<DraggableWindow
@@ -221,19 +207,24 @@ function App() {
 					distanceFromTop={190}
 					notClosable={false}
 				>
-					<div className="h-[500px] p-5">
-						<h1 className="text-3xl font-bold">Hello World!</h1>
-						<h2 className="text-lg italic">This is my page.</h2>
-						<div className="border border-sky-200 my-3"></div>
-						<div className="flex flex-wrap">
-							{[...Array(6)].map((index) => (
-								<img
-									key={index}
-									src="/img/construction.gif"
-									className="h-[21.93px]"
-									alt="under construction blinkie"
-								/>
-							))}
+					<div className="h-[500px] p-2 flex gap-5">
+						<div className="flex-1">
+							<h1 className="text-3xl font-bold">Hello World!</h1>
+							<h2 className="text-lg italic">This is my page.</h2>
+							<div className="border border-sky-200 my-3"></div>
+							<div className="flex flex-wrap">
+								{[...Array(5)].map((index) => (
+									<img
+										key={index}
+										src="/img/construction.gif"
+										className="h-[18.95px]"
+										alt="under construction blinkie"
+									/>
+								))}
+							</div>
+						</div>
+						<div>
+							<img className="w-70" src="/public/img/placeholder.jpg" alt="" />
 						</div>
 					</div>
 				</DraggableWindow>
@@ -268,7 +259,7 @@ function App() {
 					horizontalPosition={"center"}
 					distanceFromTop={1900}
 				>
-					<div className="h-[100px]"></div>
+					<Footer />
 				</DraggableWindow>
 				<Draggable
 					initialPos={{ x: 25, y: 1130 }}
@@ -362,7 +353,11 @@ function App() {
 					// classes="text-lg bg-emerald-200"
 				>
 					<div className="p-1 xl:p-2 2xl:p-3 gap-3 bg-repeat relative border border-white grid grid-cols-4 justify-center items-center bg-emerald-50">
-						<div className=" flex flex-col text-xs/tight">{intro}</div>
+						<div className=" flex flex-col text-xs/tight">
+							{
+								// intro
+							}
+						</div>
 						<div className="col-span-2 flex flex-col justify-center items-center">
 							<p className="italic text-3xl 2xl:text-4xl font-serif filter-[drop-shadow(2px_2px_0_#34d399)] font-bold">
 								· · ─ ·✶ WELCOME! ✶· ─ · ·
