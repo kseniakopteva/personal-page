@@ -6,17 +6,15 @@ import Draggable from "./layouts/Draggable";
 import MovieReviews from "./components/MovieReviews";
 import Blinkies from "./components/Blinkies";
 import CoolWebsiteLinks from "./components/CoolWebsiteLinks";
-import HeaderMarquee from "./components/HeaderMarquee";
 import Button from "./components/Button";
 import GifImage from "./components/GifImage";
 import WelcomeWindow from "./components/WelcomeWindow";
-import Photocard from "./layouts/Photocard";
-import { createPortal } from "react-dom";
 import Tarot from "./components/Tarot";
 import { artPieces, intro, musicAlbums as mb } from "./data";
 import Footer from "./components/Footer";
 import FullscreenImage from "./components/FullscreenImage";
 import { getRandomInt } from "./util";
+import Stamps from "./components/Stamps";
 
 function App() {
 	const zIndexCounterHook = useContext(GlobalZIndexCounterContext);
@@ -136,7 +134,7 @@ function App() {
 
 				<DraggableWindow
 					horizontalPosition={"center-left"}
-					distanceFromTop={770}
+					distanceFromTop={790}
 					title={"Amet"}
 				>
 					<div className="text-sm h-[470px]">
@@ -230,24 +228,35 @@ function App() {
 					distanceFromTop={190}
 					notClosable={false}
 				>
-					<div className="h-[500px] p-2 flex gap-5">
-						<div className="flex-1">
-							<h1 className="text-3xl font-bold">Hello World!</h1>
-							<h2 className="text-lg italic">This is my page.</h2>
-							<div className="border border-sky-200 my-3"></div>
-							<div className="flex flex-wrap">
-								{[...Array(5)].map((index) => (
-									<img
-										key={index}
-										src="/img/construction.gif"
-										className="h-[18.95px]"
-										alt="under construction blinkie"
-									/>
-								))}
+					<div className=" p-2">
+						<div className="flex gap-5">
+							<div className="flex-1 flex flex-col justify-between">
+								<div>
+									<h1 className="text-3xl font-bold">Hello World!</h1>
+									<h2 className="text-lg italic">This is my page.</h2>
+									<div className="border border-sky-200 my-3"></div>
+									<div className="flex flex-wrap">
+										{[...Array(5)].map((index) => (
+											<img
+												key={index}
+												src="/img/construction.gif"
+												className="h-[18.95px]"
+												alt="under construction blinkie"
+											/>
+										))}
+									</div>
+								</div>
+							</div>
+							<div className="">
+								<img
+									className="w-64 mb-5 border-9 border-white rounded-lg outline outline-slate-400 drop-shadow-[0_0_3px_rgba(0,0,0,0.5)] opacity-70"
+									src="/public/img/placeholder.jpg"
+									alt=""
+								/>
 							</div>
 						</div>
-						<div>
-							<img className="w-70" src="/public/img/placeholder.jpg" alt="" />
+						<div className="max-w-full">
+							<Stamps />
 						</div>
 					</div>
 				</DraggableWindow>
@@ -303,7 +312,7 @@ function App() {
 
 				<DraggableWindow
 					horizontalPosition={"far-right"}
-					distanceFromTop={970}
+					distanceFromTop={1040}
 					title={"Wake up, Neo..."}
 					noMargin={true}
 				>

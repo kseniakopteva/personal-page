@@ -1,0 +1,57 @@
+import { useRef } from "react";
+import GifImage from "./GifImage";
+import { useEffect } from "react";
+import { stamps as s } from "../data";
+
+export default function Stamps() {
+	const stamps = s;
+
+	const containerRef = useRef(null);
+
+	useEffect(() => {
+		const el = containerRef.current;
+		if (!el) return;
+
+		const handleWheel = (e) => {
+			e.preventDefault();
+
+			el.scrollLeft += e.deltaY;
+		};
+
+		el.addEventListener("wheel", handleWheel, { passive: false });
+
+		return () => {
+			el.removeEventListener("wheel", handleWheel);
+		};
+	}, []);
+
+	// TODO: fix stamp box width (make it 100% not set length)
+
+	return (
+		<div className="bg-white">
+			<p className="text-xs text-slate-600">(Scroll with your mouse wheel!)</p>
+			<div
+				ref={containerRef}
+				className="flex gap-1 max-w-[1000px] overflow-x-scroll whitespace-nowrap"
+			>
+				{stamps.map((stamp) =>
+					stamp.url ? (
+						<a href={stamp.url} key={stamp.img}>
+							<GifImage
+								srcSlugPath={`/img/stamps/${stamp.img}`}
+								classes={`h-[55px] w-[99px] my-2 drop-shadow-[0_0_2px_rgba(0,0,0,0.75)]`}
+							/>
+						</a>
+					) : (
+						<GifImage
+							key={stamp.img}
+							srcSlugPath={`/img/stamps/${stamp.img}`}
+							orig={stamp.orig}
+							classes={`h-[55px] min-w-[99px] my-2 drop-shadow-[0_0_2px_rgba(0,0,0,0.75)]`}
+						/>
+					),
+				)}
+			</div>
+		</div>
+	);
+}

@@ -1,14 +1,7 @@
+import { properties } from "../data";
+
 export default function Footer() {
-	const footerButtons = [
-		"bestondesktop.gif",
-		"bookmark.gif",
-		"graphicdesign.png",
-		"htmllearnittoday.gif",
-		"krisbtn.png",
-		"nyancat.gif",
-		"pbimagination.gif",
-		"www.png",
-	];
+	const footerButtons = properties;
 
 	// TODO: make reduced motion version
 
