@@ -8,9 +8,11 @@ export default function DraggableWindowTopBar({
 	setIsOpen,
 	isVisible,
 	setIsVisible,
+	bringToFront,
 	classes,
 }) {
 	function toggleOpen() {
+		bringToFront();
 		setIsOpen(!isOpen);
 	}
 

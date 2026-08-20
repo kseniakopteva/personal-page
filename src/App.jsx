@@ -169,6 +169,28 @@ function App() {
 				</DraggableWindow>
 
 				<DraggableWindow
+					horizontalPosition={"center-left"}
+					distanceFromTop={1790}
+					title={"Don't open me"}
+					minimized={true}
+				>
+					<div className="text-sm h-[35px] w-full flex justify-center items-center">
+						... Oh man... :(
+					</div>
+				</DraggableWindow>
+
+				<DraggableWindow
+					horizontalPosition={"center-left"}
+					distanceFromTop={1830}
+					title={"Open me instead"}
+					minimized={true}
+				>
+					<div className="text-sm h-[35px] w-full flex justify-center items-center">
+						Hey, nice! :)
+					</div>
+				</DraggableWindow>
+
+				<DraggableWindow
 					horizontalPosition={"center-right"}
 					distanceFromTop={900}
 					title={"Lorem"}

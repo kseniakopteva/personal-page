@@ -17,13 +17,14 @@ export default function DraggableWindow({
 	horizontalPosition = null, // far-left, center, far-right, center-left, center-right
 	distanceFromTop = null,
 	offset = 0,
+	minimized = false,
 	...props
 }) {
 	const [internalIsVisible, setInternalIsVisible] = useState(true);
 	const finalIsVisible = isVisible ?? internalIsVisible;
 	const setFinalIsVisible = setIsVisible ?? setInternalIsVisible;
 
-	const [isOpen, setIsOpen] = useState(true);
+	const [isOpen, setIsOpen] = useState(!minimized);
 
 	const {
 		themeWindowClasses,

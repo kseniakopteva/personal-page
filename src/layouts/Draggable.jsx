@@ -43,7 +43,12 @@ export default function Draggable({
 		return toRotate ? getRandomDegree() : 0;
 	});
 	function rotate() {
-		if (rotate) setTurnDegree(getRandomDegree());
+		if (toRotate) setTurnDegree(getRandomDegree());
+	}
+
+	function bringToFront() {
+		nodeRef.current.style.zIndex = zIndexCounter;
+			setZIndexCounter(zIndexCounter + 1);
 	}
 
 	// TODO: rotation is peeking out of viewport
@@ -153,7 +158,7 @@ export default function Draggable({
 			{/* if it is a draggable with a handle, show top bar component and a children wrapper (passed as props) */}
 			{TopBarComponent !== undefined && ChildrenWrapperComponent !== undefined ? (
 				<div>
-					<TopBarComponent onMouseDown={onMouseDown} />
+					<TopBarComponent onMouseDown={onMouseDown} bringToFront={bringToFront} />
 					<ChildrenWrapperComponent>{children}</ChildrenWrapperComponent>
 				</div>
 			) : (
