@@ -303,6 +303,7 @@ function App() {
 								amet consectetur, adipisicing elit.
 							</p>
 							<img className="w-130" src="/img/boot_up.gif" alt="" />
+							{/* TODO: put GifImage here. for some reason doesn't work rn */}
 						</div>
 						<Stamps />
 					</div>
@@ -325,7 +326,11 @@ function App() {
 				>
 					<a href="/dungeon">
 						<div className="relative">
-							<GifImage srcSlugPath={"/img/hallway_1"} classes="w-full" />
+							<GifImage
+								srcSlugPath={"/img"}
+								imgName={"hallway_1"}
+								classes="w-full"
+							/>
 							<p className="absolute text-center top-[calc(50%-30px)] text-white left-[calc(50%-70px)] font-mono text-shadow-lg text-shadow-white">
 								Follow me <br />
 								into the dungeon

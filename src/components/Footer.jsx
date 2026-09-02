@@ -1,4 +1,5 @@
 import { properties } from "../data";
+import GifImage from "./GifImage";
 
 export default function Footer() {
 	const footerButtons = properties;
@@ -8,13 +9,21 @@ export default function Footer() {
 	return (
 		<div className="h-[100px] bg-emerald-800 flex flex-col justify-between">
 			<div className="flex flex-wrap">
-				{footerButtons.map((img, index) => {
+				{footerButtons.map((property, index) => {
 					return (
-						<img key={index} src={`/public/img/properties/${img}`} alt="" />
+						// <img key={index} src={`/public/img/properties/${img}`} alt="" />
+						<GifImage
+							key={index}
+							srcSlugPath={`/img/properties`}
+							orig={property.orig}
+							imgName={property.img}
+						/>
 					);
 				})}
 			</div>
-			<p className="text-white text-xs p-1">Made by me. Nice to see you here, by the way.</p>
+			<p className="text-white text-xs p-1">
+				Made by me. Nice to see you here, by the way.
+			</p>
 		</div>
 	);
 }

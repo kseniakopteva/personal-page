@@ -23,15 +23,18 @@ export default function Stamps() {
 					stamp.url ? (
 						<a href={stamp.url} key={stamp.img}>
 							<GifImage
-								srcSlugPath={`/img/stamps/${stamp.img}`}
+								srcSlugPath={`/img/stamps`}
+								orig={stamp.orig}
+								imgName={stamp.img}
 								classes={`h-[55px] w-[99px] my-2 drop-shadow-[0_0_2px_rgba(0,0,0,0.75)]`}
 							/>
 						</a>
 					) : (
 						<GifImage
 							key={stamp.img}
-							srcSlugPath={`/img/stamps/${stamp.img}`}
+							srcSlugPath={`/img/stamps`}
 							orig={stamp.orig}
+							imgName={stamp.img}
 							classes={`h-[55px] min-w-[99px] my-2 drop-shadow-[0_0_2px_rgba(0,0,0,0.75)]`}
 						/>
 					),

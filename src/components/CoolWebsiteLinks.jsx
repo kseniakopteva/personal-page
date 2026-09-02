@@ -12,7 +12,8 @@ export default function CoolWebsiteLinks() {
 			{allButtons.map((btn) => (
 				<a href={btn.url} target="_blank" key={btn.imageSlug}>
 					<GifImage
-						srcSlugPath={`img/buttons/${btn.imageSlug}`}
+						srcSlugPath={`img/buttons`}
+						imgName={btn.imageSlug}
 						orig={btn.orig ? btn.orig : undefined}
 						copy={btn.copy ? btn.copy : undefined}
 						width={width}

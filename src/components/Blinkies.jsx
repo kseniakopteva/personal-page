@@ -10,14 +10,16 @@ export default function Blinkies() {
 				blinky.url ? (
 					<a href={blinky.url} key={blinky.img}>
 						<GifImage
-							srcSlugPath={`img/blinkies/${blinky.img}`}
+							srcSlugPath={`img/blinkies`}
+							imgName={blinky.img}
 							classes={`h-5 w-37.5`}
 						/>
 					</a>
 				) : (
 					<GifImage
 						key={blinky.img}
-						srcSlugPath={`img/blinkies/${blinky.img}`}
+						srcSlugPath={`img/blinkies`}
+						imgName={blinky.img}
 						classes={`h-5 w-37.5`}
 					/>
 				),

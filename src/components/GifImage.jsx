@@ -1,19 +1,28 @@
 export default function GifImage({
 	srcSlugPath,
+	imgName,
 	alt,
 	orig = "gif",
 	copy = "jpg",
 	classes,
 	...props
 }) {
+	const isReducedNecessary = orig === "gif";
+
 	return (
 		<picture>
-			<source
-				srcSet={`${srcSlugPath}.${copy}`}
-				media="(prefers-reduced-motion: reduce)"
-			></source>
+			{isReducedNecessary ? (
+				<source
+					srcSet={`${srcSlugPath}/reduced/${imgName}.${copy}`}
+					media="(prefers-reduced-motion: reduce)"
+					className={classes}
+					{...props}
+				></source>
+			) : (
+				""
+			)}
 			<img
-				src={`${srcSlugPath}.${orig}`}
+				src={`${srcSlugPath}/${imgName}.${orig}`}
 				alt={alt}
 				className={classes}
 				{...props}
