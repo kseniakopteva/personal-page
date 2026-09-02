@@ -105,3 +105,7 @@ img {
   -o-user-drag: none;
   user-drag: none;
 }
+
+.sticky-note-font {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}

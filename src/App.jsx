@@ -10,7 +10,7 @@ import Button from "./components/Button";
 import GifImage from "./components/GifImage";
 import WelcomeWindow from "./components/WelcomeWindow";
 import Tarot from "./components/Tarot";
-import { artPieces, intro, musicAlbums as mb } from "./data";
+import { artPieces, intro, musicAlbums as mb, stickyNotes as sn } from "./data";
 import Footer from "./components/Footer";
 import FullscreenImage from "./components/FullscreenImage";
 import { getRandomInt } from "./util";
@@ -45,6 +45,8 @@ function App() {
 	const painting = artPieces.find((painting) => painting.id === paintingID);
 
 	const musicAlbums = mb;
+
+	const stickyNotes = sn;
 
 	return (
 		<>
@@ -135,19 +137,56 @@ function App() {
 				<DraggableWindow
 					horizontalPosition={"center-left"}
 					distanceFromTop={790}
-					title={"Amet"}
+					title={"Corkboard"}
+					noMargin={true}
 				>
-					<div className="text-sm h-[470px]">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet modi
-						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
-						recusandae ea saepe consectetur rem autem sunt, sit itaque,
-						dignissimos sint. Lorem ipsum, dolor sit amet consectetur
-						adipisicing elit. Ex maxime cum porro. Asperiores fuga eius adipisci
-						expedita alias doloremque sint rerum, eum, saepe, maxime quisquam
-						iure ab ad eos veritatis! Lorem ipsum dolor, sit amet consectetur
-						adipisicing elit.
+					<div className="flex justify-end items-end p-5 text-sm h-[470px] bg-[url(../../../public/img/corkboard/corkboard.jpg)] bg-cover">
+						<img
+							className="w-20"
+							src="/public/img/corkboard/pushpins.png"
+							alt=""
+						/>
 					</div>
 				</DraggableWindow>
+
+				{stickyNotes.map((sticky) => {
+					return (
+						<Draggable
+							key={sticky.id}
+							material={"small"}
+							shadow={"small"}
+							initialPos={{ x: sticky.x, y: sticky.y }}
+							toRotate={true}
+						>
+							<img
+								className="w-[150px] relative  m-1.25"
+								src={`/img/corkboard/${sticky.img}.png`}
+								alt=""
+							/>
+							{!sticky.long ? (
+								<p className="absolute italic text-blue-900 leading-tight top-6 left-2 my-4 mr-6 ml-2 text-center sticky-note-font">
+									{!sticky.link ? (
+										sticky.text
+									) : (
+										<a className="underline" href={sticky.link} target="_blank">
+											{sticky.text}
+										</a>
+									)}
+								</p>
+							) : (
+								<p className="absolute italic text-blue-900 text-[11px]/tight top-8 left-0 mx-3 text-center sticky-note-font">
+									{!sticky.link ? (
+										sticky.text
+									) : (
+										<a className="underline" href={sticky.link} target="_blank">
+											{sticky.text}
+										</a>
+									)}
+								</p>
+							)}
+						</Draggable>
+					);
+				})}
 
 				<DraggableWindow
 					horizontalPosition={"center-left"}
