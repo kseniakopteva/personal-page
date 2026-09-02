@@ -427,47 +427,53 @@ function App() {
 					fullscreenImage={fullscreenImage}
 				/>
 
-				{/* <DraggableWindow
+				<DraggableWindow
+					title={"Music"}
 					ref={musicWindowRef}
 					initialPos={{
-						x: 400,
-						y: 200,
+						x: 500,
+						y: 170,
 					}}
 					isVisible={isMusicVisible}
 					setIsVisible={setIsMusicVisible}
+					noMargin={true}
 				>
-					<div className=" w-120">
-						<div className="flex gap-5">
-							<h2 className="text-xl font-bold mb-3 whitespace-nowrap">
-								My Favorite Albums
-							</h2>
-							<span className="text-xs leading-3 text-right">
-								I love music, and I listen to different stuff every day. This is
-								more of a hall of fame for albums I can listen to from the first
-								song to the last.
-							</span>
-						</div>
-						<div className="flex gap-4 flex-wrap justify-between items-start p-3 ">
+					<div className=" w-180">
+						<div className="flex gap-5"></div>
+						<div className="flex gap-5 [row-gap:10px] flex-wrap justify-start items-start p-3 overflow-hidden ">
 							{musicAlbums.map((album) => (
 								<div
-									className="w-35 text-xs font-mono text-center relative"
+									className="w-25 text-xs font-mono text-center relative mr-5"
 									key={album.id}
 								>
 									<img
-										className="relative w-35 h-35 mb-2 [box-shadow:1px_1px_4px_0px_#000] border scale-100 hover:scale-[2.5] z-2 hover:z-4 transition-transform"
-										src={`/img/music/${album.img}`}
+										alt=""
+										src="/img/music/CD-ROM.png"
+										className="absolute top-0 left-8 z-1 w-25 h-25 pointer-events-none"
 									/>
 									<img
+										alt=""
+										className="relative w-25 h-25 mb-2 [box-shadow:1px_1px_4px_0px_#000] border scale-100 hover:scale-[2] z-2 hover:z-100 transition-transform"
+										src={`/img/music/${album.img}`}
+									/>
+									<div className=" drop-shadow-[4px_4px_0_#000] bg-white absolute top-0 left-0 w-25 h-25 z-0">
+										fsd
+									</div>
+									<img
+										alt=""
 										src="/img/music/overlay2.jpg"
-										className="absolute top-0 left-0 z-3 w-35 h-35 pointer-events-none mix-blend-screen"
+										className="absolute top-0 left-0 z-3 w-25 h-25 pointer-events-none mix-blend-screen"
 									/>
 									<p className="font-bold text-sm">{album.name}</p>
 									<p>{album.artist}</p>
 								</div>
 							))}
+							<span className="text-xs w-20 ml-5 h-25 flex items-center justify-center leading-3 text-center">
+								Here is some stuff I like.
+							</span>
 						</div>
 					</div>
-				</DraggableWindow> */}
+				</DraggableWindow>
 
 				<WelcomeWindow />
 			</main>
