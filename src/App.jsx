@@ -223,43 +223,98 @@ function App() {
 				</DraggableWindow>
 
 				<DraggableWindow
+					noMargin={true}
+					horizontalPosition={"center"}
+					distanceFromTop={20}
+					// classes="text-lg bg-emerald-200"
+				>
+					<div className="p-1 xl:p-2 2xl:p-3 gap-3 bg-repeat relative border border-white grid grid-cols-4 justify-center items-center bg-emerald-50">
+						<div className=" flex flex-col text-xs/tight">
+							{
+								// intro
+							}
+						</div>
+						<div className="col-span-2 flex flex-col justify-center items-center">
+							<p className="italic text-3xl 2xl:text-4xl font-serif filter-[drop-shadow(2px_2px_0_#34d399)] font-bold">
+								· · ─ ·✶ WELCOME! ✶· ─ · ·
+							</p>
+							<nav className="flex gap-5 text-sm">
+								<a
+									href=""
+									className="underline font-bold hover:scale-108 hover:text-emerald-800"
+								>
+									Link 1
+								</a>
+								<a
+									href=""
+									className="underline font-bold hover:scale-108 hover:text-emerald-800"
+								>
+									Link 2
+								</a>
+								<a
+									href=""
+									className="underline font-bold hover:scale-108 hover:text-emerald-800"
+								>
+									Link 3
+								</a>
+							</nav>
+						</div>
+						<div className=" flex flex-col text-sm italic font-bold text-emerald-900 filter-[drop-shadow(0_0_3px_#6ee7b7)] text-right">
+							Dear fellow traveller <br />
+							under the moon <br /> I think I'm growing weary <br /> and I'm
+							hoping you'll come soon...
+							{/* Lorem ipsum dolor sit amet consectetur adipisicing */}
+						</div>
+					</div>
+				</DraggableWindow>
+
+				<DraggableWindow
 					title={"Main Window"}
 					horizontalPosition={"center"}
 					distanceFromTop={190}
 					notClosable={false}
 				>
-					<div className=" p-2">
+					<div className="h-[520px] p-2 flex flex-col justify-between">
+						<header>
+							<h1 className="text-3xl font-bold">Hello World!</h1>
+							<h2 className="text-lg italic">This is my page.</h2>
+							<div className="border border-sky-200 my-3"></div>
+						</header>
 						<div className="flex gap-5">
-							<div className="flex-1 flex flex-col justify-between">
-								<div>
-									<h1 className="text-3xl font-bold">Hello World!</h1>
-									<h2 className="text-lg italic">This is my page.</h2>
-									<div className="border border-sky-200 my-3"></div>
-									<div className="flex flex-wrap">
-										{[...Array(5)].map((index) => (
-											<img
-												key={index}
-												src="/img/construction.gif"
-												className="h-[18.95px]"
-												alt="under construction blinkie"
-											/>
-										))}
-									</div>
-								</div>
-							</div>
-							<div className="">
-								<img
-									className="w-64 mb-5 border-9 border-white rounded-lg outline outline-slate-400 drop-shadow-[0_0_3px_rgba(0,0,0,0.5)] opacity-70"
-									src="/public/img/placeholder.jpg"
-									alt=""
-								/>
-							</div>
+							<p className="text-sm/tight text-justify">
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
+								dolore error, et dicta sequi voluptatibus ullam delectus
+								repellendus fuga similique sed consequuntur. Repudiandae,
+								maiores ullam ad quo nemo asperiores doloribus. Lorem ipsum
+								dolor sit amet consectetur adipisicing elit. Earum non quis fuga
+								deserunt. Repudiandae esse maiores quos, enim facere delectus et
+								ullam tenetur unde nesciunt ad error modi maxime tempore. Lorem
+								ipsum dolor sit amet consectetur adipisicing elit. Atque nemo
+								neque deleniti blanditiis porro quae odio, a cumque impedit
+								adipisci repellat architecto obcaecati aut nihil fugit vitae
+								expedita reiciendis maiores? Lorem ipsum dolor sit, amet
+								consectetur adipisicing elit. Voluptatibus voluptas nulla nihil
+								explicabo ex, non fuga, fugiat alias ab perspiciatis velit nobis
+								omnis in quas, doloribus aliquam minus ipsam aliquid. Lorem
+								ipsum dolor sit amet consectetur, adipisicing elit. Corrupti,
+								dolor? Possimus aut amet voluptatum, quo quisquam culpa
+								distinctio magni accusantium reiciendis in, est incidunt iusto
+								voluptatibus quasi. Sequi, adipisci earum? Lorem ipsum dolor sit
+								amet consectetur, adipisicing elit.
+							</p>
+							<img className="w-130" src="/img/boot_up.gif" alt="" />
 						</div>
-						<div className="max-w-full">
-							<Stamps />
-						</div>
+						<Stamps />
 					</div>
 				</DraggableWindow>
+
+				<Draggable
+					material={"small"}
+					shadow={"small"}
+					initialPos={{ x: window.innerWidth - 610, y: 135 }}
+				>
+					<img className="w-[450px]" src="/img/gumi.png" alt="" />
+				</Draggable>
 
 				<DraggableWindow
 					noMargin={true}
@@ -290,6 +345,7 @@ function App() {
 					title={"Footer"}
 					horizontalPosition={"center"}
 					distanceFromTop={1900}
+					noMargin={true}
 				>
 					<Footer />
 				</DraggableWindow>
@@ -368,53 +424,6 @@ function App() {
 						</div>
 					</div>
 				</DraggableWindow> */}
-
-				{/* <HeaderMarquee /> */}
-				<DraggableWindow
-					noMargin={true}
-					horizontalPosition={"center"}
-					distanceFromTop={20}
-					// classes="text-lg bg-emerald-200"
-				>
-					<div className="p-1 xl:p-2 2xl:p-3 gap-3 bg-repeat relative border border-white grid grid-cols-4 justify-center items-center bg-emerald-50">
-						<div className=" flex flex-col text-xs/tight">
-							{
-								// intro
-							}
-						</div>
-						<div className="col-span-2 flex flex-col justify-center items-center">
-							<p className="italic text-3xl 2xl:text-4xl font-serif filter-[drop-shadow(2px_2px_0_#34d399)] font-bold">
-								· · ─ ·✶ WELCOME! ✶· ─ · ·
-							</p>
-							<nav className="flex gap-5 text-sm">
-								<a
-									href=""
-									className="underline font-bold hover:scale-108 hover:text-emerald-800"
-								>
-									Link 1
-								</a>
-								<a
-									href=""
-									className="underline font-bold hover:scale-108 hover:text-emerald-800"
-								>
-									Link 2
-								</a>
-								<a
-									href=""
-									className="underline font-bold hover:scale-108 hover:text-emerald-800"
-								>
-									Link 3
-								</a>
-							</nav>
-						</div>
-						<div className=" flex flex-col text-sm italic font-bold text-emerald-900 filter-[drop-shadow(0_0_3px_#6ee7b7)] text-right">
-							Dear fellow traveller <br />
-							under the moon <br /> I think I'm growing weary <br /> and I'm
-							hoping you'll come soon...
-							{/* Lorem ipsum dolor sit amet consectetur adipisicing */}
-						</div>
-					</div>
-				</DraggableWindow>
 
 				<WelcomeWindow />
 			</main>

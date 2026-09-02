@@ -34,7 +34,9 @@ export default function Draggable({
 	const nodeRef = rest.ref ?? internalNodeRef;
 
 	// the top z-index. so that the last moved (globally) is on top.
-	const [zIndexCounter, setZIndexCounter] = useContext(GlobalZIndexCounterContext);
+	const [zIndexCounter, setZIndexCounter] = useContext(
+		GlobalZIndexCounterContext,
+	);
 
 	function getRandomDegree() {
 		return ((Math.random() * 2 - 1) * 0.01).toFixed(3);
@@ -48,7 +50,7 @@ export default function Draggable({
 
 	function bringToFront() {
 		nodeRef.current.style.zIndex = zIndexCounter;
-			setZIndexCounter(zIndexCounter + 1);
+		setZIndexCounter(zIndexCounter + 1);
 	}
 
 	// TODO: rotation is peeking out of viewport
@@ -66,7 +68,8 @@ export default function Draggable({
 
 			const parentRect = nodeRef.current.parentElement.getBoundingClientRect();
 
-			const maxX = parentRect.width - nodeRef.current.getBoundingClientRect().width;
+			const maxX =
+				parentRect.width - nodeRef.current.getBoundingClientRect().width;
 			const maxY =
 				parentRect.height - nodeRef.current.getBoundingClientRect().height;
 
@@ -123,7 +126,9 @@ export default function Draggable({
 
 		// set the element above everything else while the mouse is dragging
 		nodeRef.current.style.zIndex = 9999;
-		if (material) nodeRef.current.style.scale = "1.05";
+		if (material)
+			if (material === "small") nodeRef.current.style.scale = "1.01";
+			else nodeRef.current.style.scale = "1.05";
 
 		// store the initial offset between the mouse position and the element’s top-left corner
 		mouseAndElementOffset.current = {
@@ -152,13 +157,17 @@ export default function Draggable({
 				transition: "all", // for scaling to be smooth
 				transform: `rotate(${turnDegree}turn)`,
 			}}
-			className={`${classes} ${shadow ? (shadow === "large" ? "filter-[drop-shadow(3px_2px_10px_#000)]" : "filter-[drop-shadow(0_2px_2px_#000)]") : ""}`}
+			className={`${classes} ${shadow ? (shadow === "large" ? "filter-[drop-shadow(3px_2px_10px_#000)]" : shadow === "small" ? "filter-[drop-shadow(0px_0px_3px_rgba(0,0,0,0.15))]" : "filter-[drop-shadow(0_2px_2px_#000)]") : ""}`}
 			{...rest}
 		>
 			{/* if it is a draggable with a handle, show top bar component and a children wrapper (passed as props) */}
-			{TopBarComponent !== undefined && ChildrenWrapperComponent !== undefined ? (
+			{TopBarComponent !== undefined &&
+			ChildrenWrapperComponent !== undefined ? (
 				<div>
-					<TopBarComponent onMouseDown={onMouseDown} bringToFront={bringToFront} />
+					<TopBarComponent
+						onMouseDown={onMouseDown}
+						bringToFront={bringToFront}
+					/>
 					<ChildrenWrapperComponent>{children}</ChildrenWrapperComponent>
 				</div>
 			) : (
