@@ -10,7 +10,13 @@ import Button from "./components/Button";
 import GifImage from "./components/GifImage";
 import WelcomeWindow from "./components/WelcomeWindow";
 import Tarot from "./components/Tarot";
-import { artPieces, intro, musicAlbums as mb, stickyNotes as sn } from "./data";
+import {
+	artPieces,
+	intro,
+	leonQuips as lq,
+	musicAlbums as mb,
+	stickyNotes as sn,
+} from "./data";
 import Footer from "./components/Footer";
 import FullscreenImage from "./components/FullscreenImage";
 import { getRandomInt } from "./util";
@@ -47,6 +53,9 @@ function App() {
 	const musicAlbums = mb;
 
 	const stickyNotes = sn;
+
+	const leonQuips = lq;
+	const [leonQuip, setLeonQuip] = useState(getRandomInt(0, 17));
 
 	return (
 		<>
@@ -244,22 +253,23 @@ function App() {
 					</div>
 				</DraggableWindow>
 
-				<DraggableWindow
+				{/* <DraggableWindow
 					horizontalPosition={"center-right"}
 					distanceFromTop={1260}
-					title={"Ipsum"}
+					title={
+						"For sudden bursts of creativity... (if you drag/minimize: the art will be lost!)"
+					}
+					noMargin={true}
 				>
-					<div className="text-sm h-[565px]" title={"Elit"}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet modi
-						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
-						recusandae ea saepe consectetur rem autem sunt, sit itaque,
-						dignissimos sint. Lorem ipsum, dolor sit amet consectetur
-						adipisicing elit. Ex maxime cum porro. Asperiores fuga eius adipisci
-						expedita alias doloremque sint rerum, eum, saepe, maxime quisquam
-						iure ab ad eos veritatis! Lorem ipsum dolor, sit amet consectetur
-						adipisicing elit.
+					<div className="text-sm h-[565px]">
+						<iframe
+							title="Paint"
+							src="https://jspaint.app"
+							width="100%"
+							height="100%"
+						></iframe>
 					</div>
-				</DraggableWindow>
+				</DraggableWindow> */}
 
 				<DraggableWindow
 					noMargin={true}
@@ -418,6 +428,25 @@ function App() {
 				>
 					<div className="h-25 bg-[url('../../../public/img/digital_rain.gif')] bg-cover motion-reduce:bg-[url('../../../public/img/patterns/stars.jpg')]"></div>
 				</DraggableWindow>
+
+				<div className="absolute bottom-0 right-0">
+					<button
+						className="cursor-pointer"
+						type="button"
+						onClick={() => setLeonQuip(getRandomInt(0, 17))}
+					>
+						<img
+							className="relative m-7 z-1 "
+							src="/public/img/leon.png"
+							alt=""
+						/>
+
+						<div className="text-center text-emerald-950 speech-bubble absolute -top-20 left-5 bg-white z-9999 h-20 w-40 border rounded-lg p-3 flex justify-center items-center italic text-xs/tight">
+							{leonQuips[leonQuip]}
+						</div>
+						<div className="absolute bottom-10 right-13 bg-emerald-950 w-30 h-20 rounded-[100%] blur-md opacity-70"></div>
+					</button>
+				</div>
 
 				<MovieReviews
 					isMoviesVisible={isMoviesVisible}
