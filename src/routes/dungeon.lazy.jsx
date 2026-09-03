@@ -25,6 +25,12 @@ function DungeonRoute() {
 				>
 					Return
 				</a>
+				<a
+					href="/old-one"
+					className="text-emerald-500 underline filter-[drop-shadow(0_0_3px_#10b981)] mt-5"
+				>
+					Speak to the Old One
+				</a>
 			</div>
 		</main>
 	);

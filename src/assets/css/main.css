@@ -113,19 +113,75 @@ img {
 .speech-bubble {
   box-shadow: 0px 2px 1px #000;
 }
-.speech-bubble::before{
-  content:"";
+
+.speech-bubble::before {
+  content: "";
   position: absolute;
-  bottom:-8px;
-  right:70px;
-  margin:auto;
+  bottom: -8px;
+  right: 70px;
+  margin: auto;
   height: 15px;
   width: 15px;
-  border:1px solid #fff;
-  transform:rotate(45deg);
+  border: 1px solid #fff;
+  transform: rotate(45deg);
   background-color: #fff;
-  border-bottom:1px solid #000;
-  border-right:1px solid #000;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
   box-shadow: 2px 2px 1px #000;
+
+}
+
+@keyframes pulsing {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulse {
+  animation: pulsing 10s infinite;
+}
+
+@keyframes poing {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05) translateY(-5px);
+  }
+
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+.poing {
+  animation: poing 0.3s normal;
+}
+
+@keyframes slightScale {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.01);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.slight-scale {
+  animation: slightScale 0.1s normal;
 
 }

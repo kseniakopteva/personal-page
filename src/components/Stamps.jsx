@@ -39,6 +39,9 @@ export default function Stamps() {
 						/>
 					),
 				)}
+				<div className="min-w-170 flex items-center p-3 text-xs italic">
+					This is all... for now...
+				</div>
 			</div>
 		</div>
 	);

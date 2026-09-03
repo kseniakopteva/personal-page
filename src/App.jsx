@@ -21,6 +21,7 @@ import Footer from "./components/Footer";
 import FullscreenImage from "./components/FullscreenImage";
 import { getRandomInt } from "./util";
 import Stamps from "./components/Stamps";
+import JSPaint from "./components/JSPaint";
 
 function App() {
 	const zIndexCounterHook = useContext(GlobalZIndexCounterContext);
@@ -66,6 +67,12 @@ function App() {
 					...themeMainBackgroundObject,
 				}}
 			>
+				<img
+					className="absolute top-100 left-100 w-60"
+					src="/public/img/pc.gif"
+					alt=""
+				/>
+
 				<DraggableWindow
 					horizontalPosition={"far-right"}
 					distanceFromTop={20}
@@ -253,23 +260,7 @@ function App() {
 					</div>
 				</DraggableWindow>
 
-				{/* <DraggableWindow
-					horizontalPosition={"center-right"}
-					distanceFromTop={1260}
-					title={
-						"For sudden bursts of creativity... (if you drag/minimize: the art will be lost!)"
-					}
-					noMargin={true}
-				>
-					<div className="text-sm h-[565px]">
-						<iframe
-							title="Paint"
-							src="https://jspaint.app"
-							width="100%"
-							height="100%"
-						></iframe>
-					</div>
-				</DraggableWindow> */}
+				<JSPaint key="jspaint" />
 
 				<DraggableWindow
 					noMargin={true}
@@ -358,13 +349,13 @@ function App() {
 					</div>
 				</DraggableWindow>
 
-				<Draggable
+				{/* <Draggable
 					material={"small"}
 					shadow={"small"}
 					initialPos={{ x: window.innerWidth - 610, y: 135 }}
 				>
 					<img className="w-[450px]" src="/img/gumi.png" alt="" />
-				</Draggable>
+				</Draggable> */}
 
 				<DraggableWindow
 					noMargin={true}
@@ -403,26 +394,19 @@ function App() {
 				>
 					<Footer />
 				</DraggableWindow>
-				<Draggable
-					initialPos={{ x: 25, y: 1130 }}
+				{/* <Draggable
+					initialPos={{ x: 25, y: 1230 }}
 					shadow={true}
 					material={true}
 				>
 					<div className="w-65">
 						<img src="../img/bliss_poster.jpg" alt="" />
 					</div>
-				</Draggable>
-
-				<Draggable
-					src="../img/fleabag.png"
-					classes="w-60"
-					toRotate={true}
-					initialPos={{ x: window.innerWidth - 550, y: 1600 }}
-				/>
+				</Draggable> */}
 
 				<DraggableWindow
 					horizontalPosition={"far-right"}
-					distanceFromTop={1040}
+					distanceFromTop={1080}
 					title={"Wake up, Neo..."}
 					noMargin={true}
 				>
@@ -433,15 +417,18 @@ function App() {
 					<button
 						className="cursor-pointer"
 						type="button"
-						onClick={() => setLeonQuip(getRandomInt(0, 17))}
+						onClick={() => setLeonQuip(getRandomInt(0, leonQuips.length - 1))}
 					>
 						<img
-							className="relative m-7 z-1 "
+							className="slight-scale relative m-7 z-1 drop-shadow-[1px_1px_0_black,-1px_-1px_0_black,-1px_1px_0_black,1px_-1px_0_black]"
 							src="/public/img/leon.png"
 							alt=""
 						/>
 
-						<div className="text-center text-emerald-950 speech-bubble absolute -top-20 left-5 bg-white z-9999 h-20 w-40 border rounded-lg p-3 flex justify-center items-center italic text-xs/tight">
+						<div
+							key={leonQuip}
+							className="poing text-center text-emerald-950 speech-bubble absolute -top-20 left-5 bg-white h-20 w-40 border rounded-lg p-3 flex justify-center items-center italic text-xs/tight"
+						>
 							{leonQuips[leonQuip]}
 						</div>
 						<div className="absolute bottom-10 right-13 bg-emerald-950 w-30 h-20 rounded-[100%] blur-md opacity-70"></div>
