@@ -5,11 +5,11 @@ import { useEffect } from "react";
 import FullscreenImage from "../components/FullscreenImage";
 import { artPieces as ap } from "../data";
 
-export const Route = createLazyFileRoute("/art-gallery")({
-	component: ArtGalleryRoute,
+export const Route = createLazyFileRoute("/museum")({
+	component: MuseumRoute,
 });
 
-function ArtGalleryRoute() {
+function MuseumRoute() {
 	const [fullscreenImage, setFullscreenImage] = useState("");
 
 	const artPieces = ap;
@@ -31,7 +31,7 @@ function ArtGalleryRoute() {
 					</a>
 					<div className="flex-1">
 						<h1 className="text-2xl font-serif text-center">
-							Welcome to the Art Gallery.
+							Welcome to the Museum.
 						</h1>
 						<h2 className="text-sm font-serif text-center text-slate-400">
 							Here are my favorite paintings. Click to enlarge.

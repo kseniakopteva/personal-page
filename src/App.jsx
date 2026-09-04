@@ -22,6 +22,8 @@ import FullscreenImage from "./components/FullscreenImage";
 import { getRandomInt } from "./util";
 import Stamps from "./components/Stamps";
 import JSPaint from "./components/JSPaint";
+import clsx from "clsx";
+import { useEffect } from "react";
 
 function App() {
 	const zIndexCounterHook = useContext(GlobalZIndexCounterContext);
@@ -32,6 +34,7 @@ function App() {
 
 	const [isMusicVisible, setIsMusicVisible] = useState(false);
 	const musicWindowRef = useRef();
+	const [albumHoverDesc, setAlbumHoverDesc] = useState("");
 
 	const [fullscreenImage, setFullscreenImage] = useState("");
 
@@ -57,6 +60,27 @@ function App() {
 
 	const leonQuips = lq;
 	const [leonQuip, setLeonQuip] = useState(getRandomInt(0, 17));
+
+	const { themeWindowClasses, themeTopBarClasses, themeBodyClasses } =
+		useContext(ThemeContext);
+
+	function setMusicText(album) {
+		let finalText = "";
+		if (album.name) {
+			if (album.artist) {
+				finalText = `${album.name} by ${album.artist}`;
+			} else {
+				finalText = `${album.name}`;
+			}
+		} else {
+			if (album.artist) {
+				finalText = `${album.artist}`;
+			} else {
+				finalText = ``;
+			}
+		}
+		return setAlbumHoverDesc(finalText);
+	}
 
 	return (
 		<>
@@ -108,23 +132,16 @@ function App() {
 					</div>
 				</DraggableWindow>
 
-				<DraggableWindow
-					horizontalPosition={"far-left"}
-					distanceFromTop={426}
-					title={"Tarot"}
-					classes="text-sm"
-					noMargin={true}
-				>
-					<Tarot />
-				</DraggableWindow>
+				<Tarot />
+
 				<DraggableWindow
 					horizontalPosition={"far-left"}
 					distanceFromTop={20}
-					title={"Art Gallery"}
+					title={"Museum"}
 					noMargin={true}
 				>
 					<div className="w-full h-90 p-3 bg-[url('../../../public/img/patterns/red.webp')] bg-size-[100%_auto] bg-center flex flex-col justify-center items-center">
-						<a href="/art-gallery">
+						<a href="/museum">
 							<img
 								className="max-h-50 border-18 [border-image:url(/img/borders/frame1.png)_18_round]"
 								src={`/img/art/${painting.image}`}
@@ -142,28 +159,33 @@ function App() {
 							{painting.medium} <br />
 						</div>
 						<a
-							href="/art-gallery"
+							href="/museum"
 							className="text-white underline text-shadow font-bold font-italic text-shadow-md text-shadow-white/50"
 						>
-							VISIT THE ART GALLERY NOW
+							VISIT THE MUSEUM NOW
 						</a>
 					</div>
 				</DraggableWindow>
 
-				<DraggableWindow
-					horizontalPosition={"center-left"}
-					distanceFromTop={790}
-					title={"Corkboard"}
-					noMargin={true}
+				<div
+					className={clsx(
+						"absolute w-[32%] top-[790px]",
+						themeWindowClasses,
+						themeTopBarClasses,
+						themeBodyClasses,
+					)}
+					style={{
+						left: `calc(20vw)`,
+					}}
 				>
-					<div className="flex justify-end items-end p-5 text-sm h-[470px] bg-[url(../../../public/img/corkboard/corkboard.jpg)] bg-cover">
+					<div className="flex justify-end items-end p-5 text-sm h-[500px] bg-[url(../../../public/img/corkboard/corkboard.jpg)] bg-cover">
 						<img
 							className="w-20"
 							src="/public/img/corkboard/pushpins.png"
 							alt=""
 						/>
 					</div>
-				</DraggableWindow>
+				</div>
 
 				{stickyNotes.map((sticky) => {
 					return (
@@ -203,6 +225,14 @@ function App() {
 						</Draggable>
 					);
 				})}
+
+				<Draggable
+					initialPos={{ x: 0.2 * window.innerWidth + 350, y: 820 }}
+					material={true}
+					shadow={"small"}
+				>
+					<img className="w-30" src="/public/img/garfield.gif" alt="" />
+				</Draggable>
 
 				<DraggableWindow
 					horizontalPosition={"center-left"}
@@ -266,13 +296,33 @@ function App() {
 					noMargin={true}
 					horizontalPosition={"center"}
 					distanceFromTop={20}
-					// classes="text-lg bg-emerald-200"
+					classes="relative"
 				>
-					<div className="p-1 xl:p-2 2xl:p-3 gap-3 bg-repeat relative border border-white grid grid-cols-4 justify-center items-center bg-emerald-50">
+					<div className="p-1 xl:p-2 2xl:p-3 gap-3 bg-repeat border border-white grid grid-cols-4 justify-center items-center bg-emerald-50">
 						<div className=" flex flex-col text-xs/tight">
 							{
 								// intro
 							}
+							<img
+								className="w-40 absolute bottom-0 left-44 [transform:scale(-1,1)]"
+								src="/public/img/sayori.png"
+								alt=""
+							/>
+							<img
+								className="w-35 absolute bottom-0 -left-10"
+								src="/public/img/natsuki.png"
+								alt=""
+							/>
+							<img
+								className="w-35 absolute bottom-0 left-27"
+								src="/public/img/yuri.png"
+								alt=""
+							/>
+							<img
+								className="w-38 absolute bottom-0 left-8"
+								src="/public/img/monika2.png"
+								alt=""
+							/>
 						</div>
 						<div className="col-span-2 flex flex-col justify-center items-center">
 							<p className="italic text-3xl 2xl:text-4xl font-serif filter-[drop-shadow(2px_2px_0_#34d399)] font-bold">
@@ -303,7 +353,6 @@ function App() {
 							Dear fellow traveller <br />
 							under the moon <br /> I think I'm growing weary <br /> and I'm
 							hoping you'll come soon...
-							{/* Lorem ipsum dolor sit amet consectetur adipisicing */}
 						</div>
 					</div>
 				</DraggableWindow>
@@ -454,13 +503,19 @@ function App() {
 					setIsVisible={setIsMusicVisible}
 					noMargin={true}
 				>
-					<div className=" w-180">
+					<div className=" w-190 bg-[url(../../../public/img/patterns/purple2.gif)] shadow-[inset_0_0_50px_#000]">
 						<div className="flex gap-5"></div>
-						<div className="flex gap-5 [row-gap:10px] flex-wrap justify-start items-start p-3 overflow-hidden ">
+						<div className="flex gap-5 [row-gap:10px] flex-wrap justify-start items-start p-8 overflow-hidden">
 							{musicAlbums.map((album) => (
+								// biome-ignore lint/a11y/noStaticElementInteractions: <explanation>
+								// biome-ignore lint/a11y/useKeyWithMouseEvents: <explanation>
 								<div
 									className="w-25 text-xs font-mono text-center relative mr-5"
 									key={album.id}
+									onMouseOver={() => {
+										setMusicText(album);
+									}}
+									onMouseOut={() => setMusicText("")}
 								>
 									<img
 										alt=""
@@ -469,7 +524,7 @@ function App() {
 									/>
 									<img
 										alt=""
-										className="relative w-25 h-25 mb-2 [box-shadow:1px_1px_4px_0px_#000] border scale-100 hover:scale-[2] z-2 hover:z-100 transition-transform"
+										className="relative w-25 h-25 mb-2 [box-shadow:1px_1px_4px_0px_#000] border scale-100 hover:scale-[1.6] z-2 hover:z-100 transition-transform"
 										src={`/img/music/${album.img}`}
 									/>
 									<div className=" drop-shadow-[4px_4px_0_#000] bg-white absolute top-0 left-0 w-25 h-25 z-0">
@@ -480,12 +535,10 @@ function App() {
 										src="/img/music/overlay2.jpg"
 										className="absolute top-0 left-0 z-3 w-25 h-25 pointer-events-none mix-blend-screen"
 									/>
-									<p className="font-bold text-sm">{album.name}</p>
-									<p>{album.artist}</p>
 								</div>
 							))}
-							<span className="text-xs w-20 ml-5 h-25 flex items-center justify-center leading-3 text-center">
-								Here is some stuff I like.
+							<span className="text-xs text-white w-20 ml-5 h-25 flex items-center justify-center leading-3 text-center">
+								{albumHoverDesc || "Here is some stuff I like. (hover over)"}
 							</span>
 						</div>
 					</div>
