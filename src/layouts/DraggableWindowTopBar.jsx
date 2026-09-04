@@ -34,7 +34,7 @@ export default function DraggableWindowTopBar({
 			>
 				{title}
 			</p>
-			<div className="flex gap-1 py-0.5">
+			<div className="flex gap-1 py-0.5 items-center pr-1">
 				<button
 					className=" cursor-pointer rounded-sm"
 					onClick={toggleOpen}

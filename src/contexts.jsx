@@ -4,7 +4,7 @@ export const GlobalZIndexCounterContext = createContext();
 export const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-	const [theme] = useState("other");
+	const [theme] = useState("mint");
 
 	// TODO: switch all either to tailwind or style objects
 	const themes = [
@@ -16,7 +16,7 @@ export function ThemeProvider({ children }) {
 				open: "border-b rounded-b",
 				closed: "",
 			},
-			windowTopBar: "xp-top-bar",
+			windowTopBar: { general: "xp-top-bar" },
 			mainBg: {
 				backgroundImage:
 					"url(https://images.unsplash.com/photo-1518717202715-9fa9d099f58a?q=80&w=1829&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
@@ -26,7 +26,7 @@ export function ThemeProvider({ children }) {
 			button: "xp-button",
 		},
 		{
-			name: "other",
+			name: "mint",
 			window: "min-h-3 border-[2px]  border-emerald-800 border-y-emerald-600 rounded-t-lg  d[box-shadow:_0px_0px_5px_0px_#065f46,_0px_0px_0px_1px_#065f46]",
 			windowBody: {
 				general: "rounded-b",

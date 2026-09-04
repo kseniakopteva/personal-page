@@ -18,6 +18,7 @@ export default function DraggableWindow({
 	distanceFromTop = null,
 	offset = 0,
 	minimized = false,
+	setWidth = null,
 	...props
 }) {
 	const [internalIsVisible, setInternalIsVisible] = useState(true);
@@ -65,6 +66,7 @@ export default function DraggableWindow({
 			break;
 		}
 	}
+	if (setWidth) width = setWidth;
 
 	return (
 		<Draggable
