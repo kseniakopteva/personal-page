@@ -91,9 +91,16 @@ function App() {
 					...themeMainBackgroundObject,
 				}}
 			>
+				<div className="absolute bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(75,134,42,0.75)_100%)] bottom-0 left-0 w-screen h-[500px]"></div>
 				<img
 					className="absolute top-100 left-100 w-60"
 					src="/public/img/pc.gif"
+					alt=""
+				/>
+
+				<img
+					className="absolute bottom-10 left-10 w-160 drop-shadow-[1px_1px_0_black,-1px_-1px_0_black,-1px_1px_0_black,1px_-1px_0_black]"
+					src="/public/img/treehouse.png"
 					alt=""
 				/>
 
@@ -363,13 +370,13 @@ function App() {
 					distanceFromTop={190}
 					notClosable={false}
 				>
-					<div className="h-[520px] p-2 flex flex-col justify-between">
+					<div className="p-2 flex flex-col justify-between min-w-0">
 						<header>
 							<h1 className="text-3xl font-bold">Hello World!</h1>
 							<h2 className="text-lg italic">This is my page.</h2>
 							<div className="border border-sky-200 my-3"></div>
 						</header>
-						<div className="flex gap-5">
+						<div className="flex flex-col lg:flex-row  gap-5 items-start">
 							<p className="text-sm/tight text-justify">
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
 								dolore error, et dicta sequi voluptatibus ullam delectus
@@ -391,8 +398,13 @@ function App() {
 								voluptatibus quasi. Sequi, adipisci earum? Lorem ipsum dolor sit
 								amet consectetur, adipisicing elit.
 							</p>
-							<img className="w-130" src="/img/boot_up.gif" alt="" />
-							{/* TODO: put GifImage here. for some reason doesn't work rn */}
+							<GifImage
+								srcSlugPath={`/img`}
+								orig={"gif"}
+								imgName={"boot_up"}
+								classes={"w-full"}
+								pictureClasses={"w-full lg:min-w-[50%]"}
+							/>
 						</div>
 						<Stamps />
 					</div>
@@ -459,7 +471,7 @@ function App() {
 					title={"Wake up, Neo..."}
 					noMargin={true}
 				>
-					<div className="h-25 bg-[url('../../../public/img/digital_rain.gif')] bg-cover motion-reduce:bg-[url('../../../public/img/patterns/stars.jpg')]"></div>
+					<div className="h-25 bg-[url('../../../public/img/digital_rain.gif')] bg-cover motion-reduce:bg-[url('../../../public/img/reduced/digital_rain.jpg')]"></div>
 				</DraggableWindow>
 
 				<div className="absolute bottom-0 right-0">

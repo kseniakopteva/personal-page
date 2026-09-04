@@ -24,7 +24,7 @@ export default function Clock() {
 					: "Fall";
 
 	return (
-		<div className="flex flex-row">
+		<div className="flex flex-col items-center gap-3 2xl:gap-0 2xl:flex-row">
 			<div>
 				<h2 className="text-xs">
 					Today is{" "}

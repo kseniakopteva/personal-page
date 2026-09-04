@@ -8,7 +8,7 @@ export default function DraggableWindowBody({
 }) {
 	return (
 		<div
-			className={`${classes} bg-white min-w-fit ${!noMargin ? "px-3" : ""} cursor-auto ${isOpen ? (!noMargin ? "visible py-3" : "visible") : "invisible h-0! py-0"}`}
+			className={`${classes} bg-white min-w-0 ${!noMargin ? "px-3" : ""} cursor-auto ${isOpen ? (!noMargin ? "visible py-3" : "visible") : "invisible h-0! py-0"}`}
 		>
 			{children}
 			{okButton && (

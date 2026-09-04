@@ -5,12 +5,13 @@ export default function GifImage({
 	orig = "gif",
 	copy = "jpg",
 	classes,
+	pictureClasses,
 	...props
 }) {
 	const isReducedNecessary = orig === "gif";
 
 	return (
-		<picture>
+		<picture className={pictureClasses}>
 			{isReducedNecessary ? (
 				<source
 					srcSet={`${srcSlugPath}/reduced/${imgName}.${copy}`}
