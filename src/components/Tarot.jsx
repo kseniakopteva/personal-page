@@ -14,6 +14,7 @@ export default function Tarot() {
 	const [card, setCard] = useState(null);
 	const [areReversed, setAreReversed] = useState(false);
 	const [isCurrentReversed, setIsCurrentReversed] = useState(false);
+	const [onlyMajor, setOnlyMajor] = useState(true);
 
 	const timeoutRef = useRef(null);
 
@@ -22,7 +23,9 @@ export default function Tarot() {
 
 		setStatus("draw");
 
-		const randomID = getRandomInt(0, 77);
+		let randomID;
+		if (!onlyMajor) randomID = getRandomInt(0, 77);
+		else randomID = getRandomInt(0, 21);
 
 		const randomCard = tarotCards.find((card) => {
 			return card.id === randomID;
@@ -80,22 +83,50 @@ export default function Tarot() {
 						<div className="flex gap-2">
 							<div className="mt-2 flex gap-2">
 								<input
+									className="cursor-pointer"
+									type="checkbox"
+									name="onlyMajor"
+									id="onlyMajor"
+									checked={onlyMajor}
+									onChange={(e) => setOnlyMajor(e.target.checked)}
+								/>
+
+								<label
+									className={clsx(
+										"cursor-pointer",
+										onlyMajor ? "text-amber-400" : "",
+									)}
+									htmlFor="onlyMajor"
+								>
+									only Major Arcana
+								</label>
+							</div>
+						</div>
+						<div className="flex gap-2">
+							<div className="flex gap-2">
+								<input
+									className="cursor-pointer"
 									type="checkbox"
 									name="isReverse"
 									id="isReverse"
 									checked={areReversed}
 									onChange={(e) => setAreReversed(e.target.checked)}
 								/>
-								<label htmlFor="isReverse">add reversed cards too</label>
+								<label
+									className={clsx(
+										"cursor-pointer",
+										areReversed ? "text-amber-400" : "",
+									)}
+									htmlFor="isReverse"
+								>
+									add reversed cards too
+								</label>
 							</div>
 						</div>
 
 						<p className="m-2 text-xs/tight italic text-center text-slate-400">
 							(No meaning will be shown. It is yours to understand the guidance
 							of the stars.)
-						</p>
-						<p className="m-2 text-xs/tight italic text-center text-slate-400">
-							(Don't move anything. The result will disappear.)
 						</p>
 					</div>
 				)}
@@ -132,7 +163,7 @@ export default function Tarot() {
 								}}
 								onClick={tumble}
 							>
-								<div className="perspective-[1000px]">
+								<div className="perspective-[1000px] cursor-pointer">
 									<img
 										className={clsx(
 											"h-45 my-2 transform-3d tarot-rocking cursor-pointer border-2 border-white rounded-lg",
