@@ -14,6 +14,7 @@ import {
 	artPieces,
 	intro,
 	leonQuips as lq,
+	mainWindowText,
 	musicAlbums as mb,
 	stickyNotes as sn,
 } from "./data";
@@ -91,18 +92,106 @@ function App() {
 					...themeMainBackgroundObject,
 				}}
 			>
+				{/* top gradient */}
+				<div className="absolute bg-[url(/img/patterns/stars.gif)] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,0))] [mix-blend-mode:overlay] top-0 left-0 w-screen h-[800px] "></div>
+				<div className="absolute bg-[url(/img/patterns/stars.gif)] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,1),rgba(0,0,0,0))] [mix-blend-mode:overlay] top-0 left-0 w-screen h-[300px] "></div>
+
+				{/* whole page sparkles */}
+				<div className="absolute bg-[url(/img/patterns/stars.gif)] [mix-blend-mode:screen] top-0 left-0 w-screen h-full "></div>
+
+				{/* bottom sparkle gradient */}
+				<div className="absolute bg-[url(/img/patterns/stars.gif)] [mask-image:linear-gradient(to_top,rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,0))] [mix-blend-mode:overlay] bottom-0 left-0 w-screen h-[500px] "></div>
+
+				{/* bottom green gradient */}
 				<div className="absolute bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(75,134,42,0.75)_100%)] bottom-0 left-0 w-screen h-[500px]"></div>
-				<img
+
+				{/* <img
 					className="absolute top-100 left-100 w-60"
 					src="/public/img/pc.gif"
 					alt=""
+				/> */}
+
+				<img
+					className="absolute top-10 -left-30 w-100 drop-shadow-[0_0_10px_#a7f3d0]"
+					src="/public/img/minecraft.gif"
+					alt=""
 				/>
+
+				<div className="absolute top-100 left-100 w-60 opacity-80 ">
+					<div className="relative">
+						<img
+							className="absolute left-0"
+							src="/public/img/graffiti/x.png"
+							alt=""
+						/>
+						<img
+							className="absolute left-20 top-5"
+							src="/public/img/graffiti/e.png"
+							alt=""
+						/>
+						<img
+							className="absolute left-42 -top-5f"
+							src="/public/img/graffiti/n.png"
+							alt=""
+						/>
+						<img
+							className="absolute left-60"
+							src="/public/img/graffiti/i.png"
+							alt=""
+						/>
+						<img
+							className="absolute left-75"
+							src="/public/img/graffiti/a.png"
+							alt=""
+						/>
+
+						<img
+							className="w-25 absolute left-0 -bottom-70 filter-[hue-rotate(90deg)]"
+							src="/public/img/graffiti/littleguy.gif"
+							alt=""
+						/>
+					</div>
+				</div>
 
 				<img
 					className="absolute bottom-10 left-10 w-160 drop-shadow-[1px_1px_0_black,-1px_-1px_0_black,-1px_1px_0_black,1px_-1px_0_black]"
 					src="/public/img/treehouse.png"
 					alt=""
 				/>
+
+				<div className="absolute bottom-20 right-80">
+					<img className="" src="/public/img/flowers.png" alt="" />
+					<img
+						className="absolute top-5 -left-10"
+						src="/public/img/flowers.png"
+						alt=""
+					/>
+					<img
+						className="absolute top-0 -left-20"
+						src="/public/img/flowers.png"
+						alt=""
+					/>
+					<img
+						className="absolute top-5 -left-30"
+						src="/public/img/flowers.png"
+						alt=""
+					/>
+					<img
+						className="absolute top-0 -left-40"
+						src="/public/img/flowers.png"
+						alt=""
+					/>
+					<img
+						className="absolute top-5 -left-50"
+						src="/public/img/flowers.png"
+						alt=""
+					/>
+					<img
+						className="absolute -top-2 -left-13"
+						src="/public/img/frisk.png"
+						alt=""
+					/>
+				</div>
 
 				<DraggableWindow
 					horizontalPosition={"far-right"}
@@ -241,26 +330,88 @@ function App() {
 					<img className="w-30" src="/public/img/garfield.gif" alt="" />
 				</Draggable>
 
+				<Draggable
+					initialPos={{ x: 0.2 * window.innerWidth + 120, y: 1090 }}
+					material={true}
+					shadow={"small"}
+					toRotate={true}
+				>
+					<img
+						className="w-10 absolute -top-1 left-[calc(50%-25px)]"
+						src="/public/img/thumbtack.png"
+						alt=""
+					/>
+					<img
+						className="w-70"
+						src="/public/img/gravity_falls_postcard.jpg"
+						alt=""
+					/>
+				</Draggable>
+
 				<DraggableWindow
 					horizontalPosition={"center-left"}
 					distanceFromTop={1325}
 					title={"Consectetur"}
+					noMargin={true}
 				>
-					<div className="text-sm h-[375px]">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet modi
-						at quaerat ab sequi quos quia recusandae. Esse perspiciatis
-						recusandae ea saepe consectetur rem autem sunt, sit itaque,
-						dignissimos sint. Lorem ipsum, dolor sit amet consectetur
-						adipisicing elit. Ex maxime cum porro. Asperiores fuga eius adipisci
-						expedita alias doloremque sint rerum, eum, saepe, maxime quisquam
-						iure ab ad eos veritatis! Lorem ipsum dolor, sit amet consectetur
-						adipisicing elit.
+					<div className=" h-[375px]">
+						<div className="text-blue-900 pl-22 pb-5 pr-5 bg-[url(/img/patterns/paper.gif)] bg-size-[510px] bg-repeat">
+							<h3 className="text-lg font-bold py-2">Heading</h3>
+							<p className="text-xs/tight italic">
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
+								modi at quaerat ab sequi quos quia recusandae. Esse perspiciatis
+								recusandae ea saepe consectetur rem autem sunt, sit itaque,
+								dignissimos sint. Lorem ipsum, dolor sit amet consectetur
+								adipisicing elit. Ex maxime cum porro. Asperiores fuga eius
+								adipisci expedita alias doloremque sint rerum, eum, saepe,
+								maxime quisquam iure ab ad eos veritatis! Lorem ipsum dolor, sit
+								amet consectetur adipisicing elit. Lorem ipsum dolor sit amet
+								consectetur adipisicing elit. Amet modi at quaerat ab sequi quos
+								quia recusandae. Esse perspiciatis recusandae ea saepe
+								consectetur rem autem sunt, sit itaque, dignissimos sint. Lorem
+								ipsum, dolor sit amet consectetur adipisicing elit. Ex maxime
+								cum porro. Asperiores fuga eius adipisci expedita alias
+								doloremque sint rerum, eum, saepe, maxime quisquam iure ab ad
+								eos veritatis! Lorem ipsum dolor, sit amet consectetur
+								adipisicing elit. Lorem ipsum dolor sit amet consectetur
+								adipisicing elit. Amet modi at quaerat ab sequi quos quia
+								recusandae. Esse perspiciatis recusandae ea saepe consectetur
+								rem autem sunt, sit itaque, dignissimos sint. Lorem ipsum, dolor
+								sit amet consectetur adipisicing elit. Ex maxime cum porro.
+								Asperiores fuga eius adipisci expedita alias doloremque sint
+								rerum, eum, saepe, maxime quisquam iure ab ad eos veritatis!
+								Lorem ipsum dolor, sit amet consectetur adipisicing elit. Lorem
+								ipsum dolor sit amet consectetur adipisicing elit. Amet modi at
+								quaerat ab sequi quos quia recusandae. Esse perspiciatis
+								recusandae ea saepe consectetur rem autem sunt, sit itaque,
+								dignissimos sint. Lorem ipsum, dolor sit amet consectetur
+								adipisicing elit. Ex maxime cum porro. Asperiores fuga eius
+								adipisci expedita alias doloremque sint rerum, eum, saepe,
+								maxime quisquam iure ab ad eos veritatis! Lorem ipsum dolor, sit
+								amet consectetur adipisicing elit. Lorem ipsum dolor sit amet
+								consectetur adipisicing elit. Amet modi at quaerat ab sequi quos
+								quia recusandae. Esse perspiciatis recusandae ea saepe
+								consectetur rem autem sunt, sit itaque, dignissimos sint. Lorem
+								ipsum, dolor sit amet consectetur adipisicing elit. Ex maxime
+								cum porro. Asperiores fuga eius adipisci expedita alias
+								doloremque sint rerum, eum, saepe, maxime quisquam iure ab ad
+								eos veritatis! Lorem ipsum dolor, sit amet consectetur
+								adipisicing elit. Lorem ipsum dolor sit amet consectetur
+								adipisicing elit. Amet modi at quaerat ab sequi quos quia
+								recusandae. Esse perspiciatis recusandae ea saepe consectetur
+								rem autem sunt, sit itaque, dignissimos sint. Lorem ipsum, dolor
+								sit amet consectetur adipisicing elit. Ex maxime cum porro.
+								Asperiores fuga eius adipisci expedita alias doloremque sint
+								rerum, eum, saepe, maxime quisquam iure ab ad eos veritatis!
+								Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+							</p>
+						</div>
 					</div>
 				</DraggableWindow>
 
-				<DraggableWindow
-					horizontalPosition={"center-left"}
-					distanceFromTop={1790}
+				{/* <DraggableWindow
+					horizontalPosition={"far-left"}
+					distanceFromTop={1690}
 					title={"Don't open me"}
 					minimized={true}
 				>
@@ -270,15 +421,15 @@ function App() {
 				</DraggableWindow>
 
 				<DraggableWindow
-					horizontalPosition={"center-left"}
-					distanceFromTop={1830}
+					horizontalPosition={"far-left"}
+					distanceFromTop={1730}
 					title={"Open me instead"}
 					minimized={true}
 				>
 					<div className="text-sm h-[35px] w-full flex justify-center items-center">
 						Hey, nice! :)
 					</div>
-				</DraggableWindow>
+				</DraggableWindow> */}
 
 				<DraggableWindow
 					horizontalPosition={"center-right"}
@@ -377,26 +528,15 @@ function App() {
 							<div className="border border-sky-200 my-3"></div>
 						</header>
 						<div className="flex flex-col lg:flex-row  gap-5 items-start">
-							<p className="text-sm/tight text-justify">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
-								dolore error, et dicta sequi voluptatibus ullam delectus
-								repellendus fuga similique sed consequuntur. Repudiandae,
-								maiores ullam ad quo nemo asperiores doloribus. Lorem ipsum
-								dolor sit amet consectetur adipisicing elit. Earum non quis fuga
-								deserunt. Repudiandae esse maiores quos, enim facere delectus et
-								ullam tenetur unde nesciunt ad error modi maxime tempore. Lorem
-								ipsum dolor sit amet consectetur adipisicing elit. Atque nemo
-								neque deleniti blanditiis porro quae odio, a cumque impedit
-								adipisci repellat architecto obcaecati aut nihil fugit vitae
-								expedita reiciendis maiores? Lorem ipsum dolor sit, amet
-								consectetur adipisicing elit. Voluptatibus voluptas nulla nihil
-								explicabo ex, non fuga, fugiat alias ab perspiciatis velit nobis
-								omnis in quas, doloribus aliquam minus ipsam aliquid. Lorem
-								ipsum dolor sit amet consectetur, adipisicing elit. Corrupti,
-								dolor? Possimus aut amet voluptatum, quo quisquam culpa
-								distinctio magni accusantium reiciendis in, est incidunt iusto
-								voluptatibus quasi. Sequi, adipisci earum? Lorem ipsum dolor sit
-								amet consectetur, adipisicing elit.
+							<p className="text-sm/tight text-justify w-full lg:min-w-[50%]">
+								{mainWindowText.map((paragraph, index) => (
+									<p
+										key={index}
+										className="mb-2f first-letter:text-xl first-letter:text-emerald-700"
+									>
+										{paragraph}
+									</p>
+								))}
 							</p>
 							<GifImage
 								srcSlugPath={`/img`}
@@ -410,13 +550,31 @@ function App() {
 					</div>
 				</DraggableWindow>
 
-				{/* <Draggable
+				<Draggable
 					material={"small"}
 					shadow={"small"}
 					initialPos={{ x: window.innerWidth - 610, y: 135 }}
 				>
 					<img className="w-[450px]" src="/img/gumi.png" alt="" />
-				</Draggable> */}
+				</Draggable>
+
+				{/* <Draggable material={"small"} shadow={"small"}>
+					<img
+						className="w-30 drop-shadow-[0px_0px_0_black,-0px_-0px_0_black,-0px_0px_0_black,0px_-0px_0_black]"
+						src="/public/img/finn.png"
+						alt=""
+					/>
+				</Draggable>
+				<Draggable material={"small"} shadow={"small"}>
+					<img
+						className="w-30 drop-shadow-[1px_1px_0_black,-1px_-1px_0_black,-1px_1px_0_black,1px_-1px_0_black]"
+						src="/public/img/fern.png"
+						alt=""
+					/>
+				</Draggable>
+				<Draggable material={"small"} shadow={"small"}>
+					<img className="w-30 " src="/public/img/jake.png" alt="" />
+				</Draggable>  */}
 
 				<DraggableWindow
 					noMargin={true}
@@ -455,23 +613,61 @@ function App() {
 				>
 					<Footer />
 				</DraggableWindow>
-				{/* <Draggable
-					initialPos={{ x: 25, y: 1230 }}
+				<Draggable
+					initialPos={{ x: 20, y: 1230 }}
 					shadow={true}
 					material={true}
 				>
-					<div className="w-65">
-						<img src="../img/bliss_poster.jpg" alt="" />
+					<div className="w-70 border-10 border-white">
+						<img src="../img/cat_window.jpg" alt="" />
 					</div>
-				</Draggable> */}
+				</Draggable>
 
 				<DraggableWindow
 					horizontalPosition={"far-right"}
-					distanceFromTop={1080}
+					distanceFromTop={1060}
 					title={"Wake up, Neo..."}
 					noMargin={true}
 				>
 					<div className="h-25 bg-[url('../../../public/img/digital_rain.gif')] bg-cover motion-reduce:bg-[url('../../../public/img/reduced/digital_rain.jpg')]"></div>
+				</DraggableWindow>
+
+				<DraggableWindow
+					horizontalPosition={"far-left"}
+					offset={200}
+					distanceFromTop={1200}
+					title={"My button"}
+					noMargin={true}
+					setWidth={"w-[12%]"}
+				>
+					<div className="h-30 flex flex-col text-center justify-center items-center p-1 bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,#10b98155_100%)] border-2 border-white">
+						<p className="text-xs text-emerald-700">
+							Hey, in case you want to add it to your site.. here is my button.
+						</p>
+						<img
+							className="[pointer-events:auto]! w-[103px] m-2 drop-shadow-[2px_2px_0_white,-2px_-2px_0_white,-2px_2px_0_white,2px_-2px_0_white]"
+							src="/public/img/buttons/mine4.png"
+							alt=""
+						/>
+
+						<p className="text-xs text-slate-400">(don't hotlink)</p>
+					</div>
+				</DraggableWindow>
+
+				<DraggableWindow
+					noMargin={true}
+					title={"Thank you for visiting..."}
+					// initialPos={{ x: window.innerWidth / 2 - 86, y: 1130 }}
+					horizontalPosition={"far-right"}
+					offset={-300}
+					setWidth={true}
+					distanceFromTop={1970}
+				>
+					<div className="bg-emerald-50 border-2 border-white ">
+						<div className="px-1 py-2 w-60 text-[24px] font-serif italic font-bold filter-[drop-shadow(2px_1px_0_#34d399)] bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,#10b98155_100%)]">
+							·✶ Xenia's page ✶·
+						</div>
+					</div>
 				</DraggableWindow>
 
 				<div className="absolute bottom-0 right-0">
